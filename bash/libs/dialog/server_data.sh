@@ -44,7 +44,7 @@ get_server () {
   OPT=0
   ISSERVER=0
   while [ "$OPT" != "" ] && [ "$ISSERVER" == "0" ] ; do
-    OPT=$( dialog --title "$( echoP 'get_server_title' )" \
+    OPT=$( dialog --stdout --title "$( echoP 'get_server_title' )" \
             --inputbox "$( echoP 'get_server_content')" \
             10 40 "$( echoP 'your_server_name')" )
     echo "Resultado: $?"
