@@ -34,6 +34,6 @@
 
 welcome_dialog () {
 
-  OUTPUT=$( $DIALOG --yesno $(gettext -s "welcome_text") 10 30 )
+  OUTPUT=$( $DIALOG --yesno "$(echoP "welcome_text")" 10 30 )
 
 }
