@@ -29,39 +29,44 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-export TEXTDOMAINDIR=./bash/locale
-export TEXTDOMAIN=pyveritech
-
-#import libraries
-. ./bash/libs/os_detection.sh
+#include i18 echo
 . ./bash/libs/i18n_echo.sh
-. ./bash/libs/check_root.sh
-. ./bash/libs/dependencies.sh
 
-D=false
-SCRIPT=$0
+install_dependencies () {
 
-usage () {
-  echo "Usage: $0"
-  echo " Poner uso aqui"
+  if [ "${OS}" == "redhat" ] ; then
+  
+    PM="/usr/bin/yum -y"
+  
+    case "${VER}" in
+  
+      "7" )
+        $PM install epel-release
+        $PM install openvpn easy-rsa yum-utils dialog
+        $PM groupinstall development
+        $PM install https://centos7.iuscommunity.org/ius-release.rpm
+        $PM install python36u
+        ;;
+    
+      *) 
+        error "os_version_not_supported"
+        ;;
+    esac
+  
+  elif [ "${OS}" == "debian" ] ; then
+  
+    PM="/usr/bin/apt-get -y"
+  
+    case "${VER}" in
+      
+      "stretch/sid" ) 
+        $PM install openvpn easy-rsa dialog python3
+        ;;
+      *) 
+        error "os_version_not_supported"
+        ;;
+    esac
+  
+  fi
+
 }
-
-while getopts "v" optname ; do
-  case $optname in
-  "v")  D=true
-        echoD "getopts_debug_enabled"
-        ;;
-  "?")
-        D=true
-        error "getopts_unknown_option"
-        usage
-        ;;
-  esac
-done
-
-echoD "debug_current_platform" "$ARCH $OS $VER"
-supported_platform
-
-check_root
-
-install_dependencies
