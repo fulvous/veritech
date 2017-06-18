@@ -34,6 +34,7 @@ setup_environment () {
   echo 0 | $DIALOG  --backtitle "${BACK_TITLE}" \
                     --gauge "$( echoP 'setting_easy-rsa' )" \
                     ${SY} ${SX}
+  sleep 0.5
 
   if [ "$OS" == "redhat" ] ; then
 
@@ -44,14 +45,17 @@ setup_environment () {
     echo 30 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --gauge "$( echoP 'setting_easy-rsa' )" \
                       ${SY} ${SX}
+    sleep 0.5
     cp -afv ${EASY_RSA} ${NEW_EASY} 
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --gauge "$( echoP 'setting_easy-rsa' )" \
                       ${SY} ${SX}
+    sleep 0.5
     cp -af /etc/openvpn/easy-rsa/vars ./backup/vars   
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --gauge "$( echoP 'setting_easy-rsa' )" \
                       ${SY} ${SX}
+    sleep 0.5
 
   elif [ "$OS" == "debian" ] ; then
 
@@ -62,14 +66,17 @@ setup_environment () {
     echo 30 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --gauge "$( echoP 'setting_easy-rsa' )" \
                       ${SY} ${SX}
+    sleep 0.5
     cp -afv ${EASY_RSA} ${NEW_EASY}
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --gauge "$( echoP 'setting_easy-rsa' )" \
                       ${SY} ${SX}
+    sleep 0.5
     cp -af /etc/openvpn/easy-rsa/vars ./backup/vars   
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --gauge "$( echoP 'setting_easy-rsa' )" \
                       ${SY} ${SX}
+    sleep 0.5
 
 
   fi
