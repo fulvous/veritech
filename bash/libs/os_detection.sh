@@ -32,6 +32,7 @@
 
 #Import i18 echo
 . ./bash/libs/i18n_echo.sh
+. ./bash/libs/dialog/common.sh
 
 ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
 
@@ -56,7 +57,7 @@ supported_platform () {
   if [ "${OS}" == "redhat" ] ; then
     case "${VER}" in
       "7") SUPPORTED="true"
-        DIALOG="/usr/bin/dialog"
+        DIALOG="/usr/bin/dialog --backtitle '${BACK_TITLE}'"
         ;;
       *) SUPPORTED="false"
         ;;
@@ -64,7 +65,7 @@ supported_platform () {
   elif [ "${OS}" == "debian" ] ; then
     case "${VER}" in
       "stretch/sid" ) SUPPORTED="true"
-        DIALOG="/usr/bin/dialog"
+        DIALOG="/usr/bin/dialog --backtitle '${BACK_TITLE}'"
         ;;
       *) SUPPORTED="false"
         ;;
