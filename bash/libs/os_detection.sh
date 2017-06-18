@@ -41,7 +41,7 @@ if [ -f /etc/debian_version ]; then
     VER=$(cat /etc/debian_version)
 elif [ -f /etc/redhat-release ]; then
     OS=redhat
-    VER=$(cat /etc/redhat-release | egrep -o '[0-9\.]+')
+    VER=$(cat /etc/redhat-release | egrep -o '[0-9\.]+' | egrep '[0-9]+')
 fi
 
 supported_platform () {
@@ -57,6 +57,6 @@ supported_platform () {
         ;;
     esac
   elif [ "${OS}" == "debian" ] ; then
-    SUPPORTED="true"
+    SUPPORTED="false"
   fi
 }

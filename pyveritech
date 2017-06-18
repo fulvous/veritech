@@ -59,6 +59,6 @@ done
 
 echoD "debug_current_platform" "$ARCH $OS $VER"
 supported_platform
-if [ SUPPORTED == "false" ] ; then
-  error "Unsupported platform"
+if [ "$SUPPORTED" == "false" ] ; then
+  error "unsupported_platform" $ARCH $OS $VER
 fi
