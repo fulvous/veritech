@@ -46,7 +46,7 @@ setup_environment () {
       | $DIALOG --backtitle "${BACK_TITLE}" \
       --gauge "$( echoP 'setting_easy-rsa' )" \
       ${SY} ${SX}
-    cp -afv /etc/openvpn/easy-rsa/vars ./backup/vars   
+    cp -af /etc/openvpn/easy-rsa/vars ./backup/vars   
 
   elif [ "$OS" == "debian" ] ; then
 
@@ -59,7 +59,7 @@ setup_environment () {
       | $DIALOG --backtitle "${BACK_TITLE}" \
       --gauge "$( echoP 'setting_easy-rsa' )" \
       ${SY} ${SX}
-    cp -afv /etc/openvpn/easy-rsa/vars ./backup/vars   
+    cp -af /etc/openvpn/easy-rsa/vars ./backup/vars   
 
 
   fi
