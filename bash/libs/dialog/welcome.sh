@@ -31,7 +31,7 @@
 
 #Including backtitle
 . ./bash/libs/i18n_echo.sh
-. ./bash/libs/dialog_common.sh
+. ./bash/libs/dialog/common.sh
 
 dialog_welcome () {
 

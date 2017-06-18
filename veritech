@@ -38,7 +38,7 @@ export TEXTDOMAIN=pyveritech
 . ./bash/libs/check_root.sh
 . ./bash/libs/dependencies.sh
 . ./bash/libs/check_first_run.sh
-. ./bash/libs/dialog_welcome.sh
+. ./bash/libs/dialog/welcome.sh
 
 D=false
 SCRIPT=$0
