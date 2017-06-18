@@ -1,0 +1,2 @@
+msgid "unknown_option"
+msgstr "Unknown option given"
