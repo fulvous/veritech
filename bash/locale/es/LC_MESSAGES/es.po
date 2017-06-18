@@ -21,6 +21,6 @@ msgstr "Bienvenido a VERITECH, un administrador sencillo para servidores OpenVPN
 msgid "dialog_back_title"
 msgstr "VERITECH: Administrador gráfico en consola de OpenVPN"
 msgid "easy-rsa_content"
-msgstr "Creando el ambiente para easy-rsa:\n\n * Creando /etc/openvpn/easy-rsa\n * Copiando easy-rsa\n * Respaldando vars a ./backup"
+msgstr "Creando el ambiente para easy-rsa:\n\n * Creando /etc/openvpn/easy-rsa\n * Copiando easy-rsa\n * Respaldando vars a ./data/backup"
 msgid "easy-rsa_title"
 msgstr "Configurando easy-rsa"

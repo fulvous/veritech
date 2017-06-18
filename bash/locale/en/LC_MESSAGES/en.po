@@ -21,6 +21,6 @@ msgstr "Welcome to VERITECH a simple TUI OpenVPN administration tool.\nThis tool
 msgid "dialog_back_title"
 msgstr "VERITECH: OpenVPN TUI Administrator"
 msgid "easy-rsa_content"
-msgstr "Setting easy-rsa environment:\n\n * Creating /etc/openvpn/easy-rsa\n * Copying easy-rsa\n * Backing up vars to ./backup"
+msgstr "Setting easy-rsa environment:\n\n * Creating /etc/openvpn/easy-rsa\n * Copying easy-rsa\n * Backing up vars to ./data/backup"
 msgid "easy-rsa_title"
 msgstr "Setting easy-rsa"
