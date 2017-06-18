@@ -29,10 +29,11 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-setup_environment () {
+easy-rsa_title () {
   
   echo 0 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                    --gauge "$( echoP 'setting_easy-rsa' )" \
+                    --title "easy-rsa_title" \
+                    --gauge "$( echoP 'easy-rsa_content' )" \
                     ${SY} ${SX}
   sleep 0.5
 
@@ -43,17 +44,20 @@ setup_environment () {
     mkdir -p ${NEW_EASY}
     mkdir -p ./backup
     echo 30 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                      --gauge "$( echoP 'setting_easy-rsa' )" \
+                      --title "easy-rsa_title" \
+                      --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
     cp -afv ${EASY_RSA} ${NEW_EASY} 
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                      --gauge "$( echoP 'setting_easy-rsa' )" \
+                      --title "easy-rsa_title" \
+                      --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
     cp -af /etc/openvpn/easy-rsa/vars ./backup/vars   
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                      --gauge "$( echoP 'setting_easy-rsa' )" \
+                      --title "easy-rsa_title" \
+                      --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
 
@@ -64,17 +68,20 @@ setup_environment () {
     mkdir -p ${NEW_EASY}
     mkdir -p ./backup
     echo 30 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                      --gauge "$( echoP 'setting_easy-rsa' )" \
+                      --title "easy-rsa_title" \
+                      --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
     cp -afv ${EASY_RSA} ${NEW_EASY}
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                      --gauge "$( echoP 'setting_easy-rsa' )" \
+                      --title "easy-rsa_title" \
+                      --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
     cp -af /etc/openvpn/easy-rsa/vars ./backup/vars   
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                      --gauge "$( echoP 'setting_easy-rsa' )" \
+                      --title "easy-rsa_title" \
+                      --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
 

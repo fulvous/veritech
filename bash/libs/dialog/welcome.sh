@@ -32,6 +32,7 @@
 dialog_welcome () {
 
   $DIALOG --backtitle "$BACK_TITLE" \
+          --title "welcome" \
           --yesno "$(echoP 'welcome_text')" $SY $SX
   EXIT_CODE=$?
 
