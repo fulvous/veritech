@@ -41,9 +41,9 @@ setup_environment () {
     NEW_EASY="/etc/openvpn/easy-rsa"
     mkdir -p ${NEW_EASY}
     mkdir -p ./backup
-    cp -afv ${EASY_RSA} ${NEW_EASY} | \ 
-      pv -n -l -s $(ls -l ${EASY_RSA} |  \
-      wc -l) | $DIALOG --backtitle "${BACK_TITLE}" \
+    cp -afv ${EASY_RSA} ${NEW_EASY} | \
+      pv -n -l -s $(ls -l ${EASY_RSA} | wc -l) \
+      | $DIALOG --backtitle "${BACK_TITLE}" \
       --gauge "$( echoP 'setting_easy-rsa' )" \
       ${SY} ${SX}
     cp -afv /etc/openvpn/easy-rsa/vars ./backup/vars   
@@ -54,9 +54,9 @@ setup_environment () {
     NEW_EASY="/etc/openvpn/easy-rsa"
     mkdir -p ${NEW_EASY}
     mkdir -p ./backup
-    cp -afv ${EASY_RSA} ${NEW_EASY} | \ 
-      pv -n -l -s $(ls -l ${EASY_RSA} |  \
-      wc -l) | $DIALOG --backtitle "${BACK_TITLE}" \
+    cp -afv ${EASY_RSA} ${NEW_EASY} | \
+      pv -n -l -s $(ls -l ${EASY_RSA} | wc -l) \
+      | $DIALOG --backtitle "${BACK_TITLE}" \
       --gauge "$( echoP 'setting_easy-rsa' )" \
       ${SY} ${SX}
     cp -afv /etc/openvpn/easy-rsa/vars ./backup/vars   
