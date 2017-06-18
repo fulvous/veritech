@@ -60,3 +60,7 @@ while getopts "v" optname ; do
 done
 
 echoD "debug_current_platform" "$ARCH $OS $VER"
+supported_platform
+if [ -z SUPPORTED ] ; then
+  error "Unsupported platform"
+fi
