@@ -39,7 +39,8 @@ setup_environment () {
 
     EASY_RSA="/usr/share/easy-rsa/2.0/"    
     NEW_EASY="/etc/openvpn/easy-rsa"
-    mdkir -p ${NEW_EASY}
+    mkdir -p ${NEW_EASY}
+    mkdir -p ./backup
     cp -afv ${EASY_RSA} ${NEW_EASY} | \ 
       pv -n -l -s $(ls -l ${EASY_RSA} |  \
       wc -l) | $DIALOG --backtitle "${BACK_TITLE}" \
@@ -51,7 +52,8 @@ setup_environment () {
 
     EASY_RSA="/usr/share/easy-rsa/"    
     NEW_EASY="/etc/openvpn/easy-rsa"
-    mdkir -p ${NEW_EASY}
+    mkdir -p ${NEW_EASY}
+    mkdir -p ./backup
     cp -afv ${EASY_RSA} ${NEW_EASY} | \ 
       pv -n -l -s $(ls -l ${EASY_RSA} |  \
       wc -l) | $DIALOG --backtitle "${BACK_TITLE}" \
