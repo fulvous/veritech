@@ -29,6 +29,8 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+KEY_LIST="(KEY_COUNTRY|KEY_PROVINCE|KEY_CITY|KEY_ORG|KEY_EMAIL|KEY_SIZE)"
+
 setup_easy-rsa () {
   
   echo 0 | $DIALOG  --backtitle "${BACK_TITLE}" \
@@ -55,6 +57,7 @@ setup_easy-rsa () {
                       ${SY} ${SX}
     sleep 0.5
     cp -af /etc/openvpn/easy-rsa/vars ./backup/vars   
+    egrep -v "$KEY_LIST" ./backup/vars > /etc/openvpn/easy-rsa/vars
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "easy-rsa_title" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
@@ -79,6 +82,7 @@ setup_easy-rsa () {
                       ${SY} ${SX}
     sleep 0.5
     cp -af /etc/openvpn/easy-rsa/vars ./backup/vars   
+    egrep -v "$KEY_LIST" ./backup/vars > /etc/openvpn/easy-rsa/vars
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "easy-rsa_title" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
