@@ -56,6 +56,7 @@ supported_platform () {
   if [ "${OS}" == "redhat" ] ; then
     case "${VER}" in
       "7") SUPPORTED="true"
+        DIALOG="/usr/bin/dialog"
         ;;
       *) SUPPORTED="false"
         ;;
@@ -63,6 +64,7 @@ supported_platform () {
   elif [ "${OS}" == "debian" ] ; then
     case "${VER}" in
       "stretch/sid" ) SUPPORTED="true"
+        DIALOG="/usr/bin/dialog"
         ;;
       *) SUPPORTED="false"
         ;;

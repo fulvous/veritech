@@ -29,45 +29,4 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-export TEXTDOMAINDIR=./bash/locale
-export TEXTDOMAIN=pyveritech
-
-#import libraries
-. ./bash/libs/os_detection.sh
-. ./bash/libs/i18n_echo.sh
-. ./bash/libs/check_root.sh
-. ./bash/libs/dependencies.sh
-. ./bash/libs/check_first_run.sh
-. ./bash/libs/welcome_dialog.sh
-
-D=false
-SCRIPT=$0
-
-usage () {
-  echo "Usage: $0"
-  echo " Poner uso aqui"
-}
-
-while getopts "v" optname ; do
-  case $optname in
-  "v")  D=true
-        echoD "getopts_debug_enabled"
-        ;;
-  "?")
-        D=true
-        error "getopts_unknown_option"
-        usage
-        ;;
-  esac
-done
-
-echoD "debug_current_platform" "$ARCH $OS $VER"
-supported_platform
-
-check_root
-
-welcome_dialog
-
-install_dependencies
-
-check_first_run
+BACK_TITLE="VERITECH - Openvpn TUI administrator"
