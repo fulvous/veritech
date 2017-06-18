@@ -30,3 +30,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 BACK_TITLE="VERITECH - Openvpn TUI administrator"
+
+BUTTONS_SIZE=6
+MARGIN_COLS_SIZE=2
+
+ROWS=$(stty size | cut -f1 -d' ' )
+COLS=$(stty size | cut -f2 -d' ' )
+
