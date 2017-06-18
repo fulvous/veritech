@@ -1,2 +1,4 @@
-msgid "unknown_option"
+msgid "getopts_unknown_option"
 msgstr "Unknown option given"
+msgid "getopts_debug_enabled"
+msgstr "Debug enabled by user"

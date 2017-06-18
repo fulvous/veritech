@@ -29,34 +29,21 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-export TEXTDOMAINDIR=./bash/locale
-export TEXTDOMAIN=pyveritech
-
-#import libraries
-. ./bash/libs/os_detection.sh
-. ./bash/libs/i18n_echo.sh
-
-D=false
-SCRIPT=$0
-
-usage () {
-  echo "Usage: $0"
-  echo " Poner uso aqui"
-  echo 
-
+echoP () {
+  typeset key="$1"
+  shift
+  /bin/echo "$(gettext -s "${key}") $@" 
 }
 
-while getopts "v" optname ; do
-  case $optname in
-  "v")  D=true
-        echoD "getopts_debug_enabled"
-        ;;
-  "?")
-        D=true
-        error "getopts_unknown_option"
-        usage
-        ;;
-  esac
-done
+echoD () {
+  typeset key="$1"
+  shift
+  $D && /bin/echo "$(gettext -s "${key}") $@" 
+}
 
-echo "$ARCH $OS $VER"
+error () {
+  typeset key="$1"
+  shift
+  echo "ERROR: $(gettext -s "${key}") $@" >&2
+}
+

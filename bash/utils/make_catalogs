@@ -30,8 +30,12 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-locales_dir=../locales
+#make i18n catalogs
 
-for i in `ls -1 $locales_dir` ; do 
-  echo "directorio: $i"
+locale_dir="./bash/locale"
+
+for dir in $( ls ${locale_dir} ) ; do
+  echo "Converting... `ls ${locale_dir}/${dir}/LC_MESSAGES`"
+  msgfmt -o ${locale_dir}/${dir}/LC_MESSAGES/pyveritech.mo ${locale_dir}/${dir}/LC_MESSAGES/${dir}.po
 done
+
