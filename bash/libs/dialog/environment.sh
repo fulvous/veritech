@@ -37,7 +37,7 @@ setup_environment () {
 
   if [ "$OS" == "redhat" ] ; then
 
-    EASY_RSA="/usr/share/easy-rsa/2.0/"    
+    EASY_RSA="/usr/share/easy-rsa/2.0/*"
     NEW_EASY="/etc/openvpn/easy-rsa/"
     mkdir -p ${NEW_EASY}
     mkdir -p ./backup
@@ -50,7 +50,7 @@ setup_environment () {
 
   elif [ "$OS" == "debian" ] ; then
 
-    EASY_RSA="/usr/share/easy-rsa/"    
+    EASY_RSA="/usr/share/easy-rsa/*"    
     NEW_EASY="/etc/openvpn/easy-rsa/"
     mkdir -p ${NEW_EASY}
     mkdir -p ./backup
