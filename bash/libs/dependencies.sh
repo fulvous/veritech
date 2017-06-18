@@ -40,11 +40,11 @@ install_dependencies () {
   
       "7" )
 
-        $QC openvpn easy-rsa dialog > /dev/null 2>&1
+        $QC openvpn easy-rsa dialog pv  > /dev/null 2>&1
         if [ "$?" != "0" ] ; then  
           echoD "need_to_install"
           $PM install epel-release
-          $PM install openvpn easy-rsa yum-utils dialog
+          $PM install openvpn easy-rsa yum-utils dialog pv
           $PM groupinstall development
         fi
         ;;
@@ -63,10 +63,10 @@ install_dependencies () {
       
       "stretch/sid" ) 
 
-        $QC openvpn easy-rsa dialog > /dev/null 2>&1
+        $QC openvpn easy-rsa dialog pv > /dev/null 2>&1
         if [ "$?" != "0" ] ; then
           echoD "need_to_install"
-          $PM install openvpn easy-rsa dialog
+          $PM install openvpn easy-rsa dialog pv
         fi
         ;;
       *) 
