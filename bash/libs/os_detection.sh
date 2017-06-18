@@ -46,15 +46,17 @@ fi
 
 supported_platform () {
   if [ "${OS}" != "debian" ] && [ "${OS}" != "redhat" ] ; then
-    SUPPORTED=false
+    SUPPORTED="false"
   fi
 
   if [ "${OS}" == "redhat" ] ; then
     case "${VER}" in
-      "7") SUPPORTED=true
+      "7") SUPPORTED="true"
         ;;
-      *) SUPPORTED=false
+      *) SUPPORTED="false"
         ;;
     esac
+  elif [ "${OS}" == "debian" ] ; then
+    SUPPORTED="true"
   fi
 }
