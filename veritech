@@ -30,7 +30,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 export TEXTDOMAINDIR=./bash/locale
-export TEXTDOMAIN=pyveritech
+export TEXTDOMAIN=veritech
 
 #import libraries
 . ./bash/libs/os_detection.sh

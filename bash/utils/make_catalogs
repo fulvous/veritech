@@ -36,6 +36,6 @@ locale_dir="./bash/locale"
 
 for dir in $( ls ${locale_dir} ) ; do
   echo "Converting... `ls ${locale_dir}/${dir}/LC_MESSAGES`"
-  msgfmt -o ${locale_dir}/${dir}/LC_MESSAGES/pyveritech.mo ${locale_dir}/${dir}/LC_MESSAGES/${dir}.po
+  msgfmt -o ${locale_dir}/${dir}/LC_MESSAGES/veritech.mo ${locale_dir}/${dir}/LC_MESSAGES/${dir}.po
 done
 
