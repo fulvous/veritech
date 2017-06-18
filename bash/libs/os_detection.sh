@@ -61,7 +61,12 @@ supported_platform () {
         ;;
     esac
   elif [ "${OS}" == "debian" ] ; then
-    SUPPORTED="true"
+    case "${VER}" in
+      "stretch/sid" ) SUPPORTED="true"
+        ;;
+      *) SUPPORTED="false"
+        ;;
+    esac
   fi
 
   #Quit if not supported
