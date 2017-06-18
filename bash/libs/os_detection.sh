@@ -29,6 +29,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+#Import i18 echo
+. ./bash/libs/i18n_echo.sh
+
 ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
 
 #if [ -f /etc/lsb-release ]; then
@@ -59,4 +63,11 @@ supported_platform () {
   elif [ "${OS}" == "debian" ] ; then
     SUPPORTED="true"
   fi
+
+  #Quit if not supported
+  if [ "$SUPPORTED" == "false" ] ; then
+    error "unsupported_platform" $ARCH $OS $VER
+    exit 1
+  fi
+
 }
