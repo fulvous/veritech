@@ -29,9 +29,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include i18 echo
-. ./bash/libs/i18n_echo.sh
-
 install_dependencies () {
 
   if [ "${OS}" == "redhat" ] ; then

@@ -29,9 +29,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#Import i18 echo
-. ./bash/libs/i18n_echo.sh
-
 check_root () {
   if [ "$(id -u)" != "0" ] ; then
     error "not_root"

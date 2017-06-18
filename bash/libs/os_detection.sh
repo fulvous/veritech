@@ -30,10 +30,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#Import i18 echo
-. ./bash/libs/i18n_echo.sh
-. ./bash/libs/dialog/common.sh
-
 ARCH=$(uname -m | sed 's/x86_//;s/i[3-6]86/32/')
 
 #if [ -f /etc/lsb-release ]; then

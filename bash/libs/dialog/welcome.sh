@@ -29,19 +29,8 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#Including backtitle
-. ./bash/libs/i18n_echo.sh
-. ./bash/libs/dialog/common.sh
-
 dialog_welcome () {
 
-  echoD "screen_size" $COLS $ROWS
-  if [ $ROWS -gt $(( 8 + 4 )) ] ; then
-    SY=$(( 8 + $BUTTONS_SIZE ))
-  else
-    SY=$ROWS
-  fi
-  SX=$(( $COLS - $MARGIN_COLS_SIZE ))
   $DIALOG --backtitle "$BACK_TITLE" \
           --yesno "$(echoP 'welcome_text')" $SY $SX
   EXIT_CODE=$?

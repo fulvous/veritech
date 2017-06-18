@@ -29,14 +29,21 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include i18n
-. ./bash/libs/i18n_echo.sh
-
 BACK_TITLE=$( echoP 'dialog_back_title' )
 
+VERTICAL_SIZE=15
 BUTTONS_SIZE=6
 MARGIN_COLS_SIZE=6
 
 ROWS=$(stty size | cut -f1 -d' ' )
 COLS=$(stty size | cut -f2 -d' ' )
+
+echoD "screen_size" $COLS $ROWS
+if [ $ROWS -gt $(( ${VERTICAL_SIZE} + ${BUTTONS_SIZE} )) ] ; then
+  SY=$(( ${VERTICAL_SIZE} + ${BUTTONS_SIZE} ))
+else
+  SY=$ROWS
+fi
+SX=$(( $COLS - $MARGIN_COLS_SIZE ))
+
 
