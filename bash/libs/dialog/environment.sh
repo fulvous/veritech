@@ -33,7 +33,7 @@ setup_environment () {
   
   echo 0 | $DIALOG  --backtitle "${BACK_TITLE}" \
                     --gauge "$( echoP 'setting_easy-rsa' )" \
-                    ${SY} ${SX} 0
+                    ${SY} ${SX}
 
   if [ "$OS" == "redhat" ] ; then
 
@@ -41,13 +41,17 @@ setup_environment () {
     NEW_EASY="/etc/openvpn/easy-rsa/"
     mkdir -p ${NEW_EASY}
     mkdir -p ./backup
-    cp -afv ${EASY_RSA} ${NEW_EASY} | \
-      ./bash/utils/slow_pipe.sh | \
-      pv -n -l -s $(ls -l ${EASY_RSA} | wc -l) \
-      | $DIALOG --backtitle "${BACK_TITLE}" \
-      --gauge "$( echoP 'setting_easy-rsa' )" \
-      ${SY} ${SX}
+    echo 30 | $DIALOG  --backtitle "${BACK_TITLE}" \
+                      --gauge "$( echoP 'setting_easy-rsa' )" \
+                      ${SY} ${SX}
+    cp -afv ${EASY_RSA} ${NEW_EASY} 
+    echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
+                      --gauge "$( echoP 'setting_easy-rsa' )" \
+                      ${SY} ${SX}
     cp -af /etc/openvpn/easy-rsa/vars ./backup/vars   
+    echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
+                      --gauge "$( echoP 'setting_easy-rsa' )" \
+                      ${SY} ${SX}
 
   elif [ "$OS" == "debian" ] ; then
 
@@ -55,13 +59,17 @@ setup_environment () {
     NEW_EASY="/etc/openvpn/easy-rsa/"
     mkdir -p ${NEW_EASY}
     mkdir -p ./backup
-    cp -afv ${EASY_RSA} ${NEW_EASY} | \
-      ./bash/utils/slow_pipe.sh | \
-      pv -n -l -s $(ls -l ${EASY_RSA} | wc -l) \
-      | $DIALOG --backtitle "${BACK_TITLE}" \
-      --gauge "$( echoP 'setting_easy-rsa' )" \
-      ${SY} ${SX}
+    echo 30 | $DIALOG  --backtitle "${BACK_TITLE}" \
+                      --gauge "$( echoP 'setting_easy-rsa' )" \
+                      ${SY} ${SX}
+    cp -afv ${EASY_RSA} ${NEW_EASY}
+    echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
+                      --gauge "$( echoP 'setting_easy-rsa' )" \
+                      ${SY} ${SX}
     cp -af /etc/openvpn/easy-rsa/vars ./backup/vars   
+    echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
+                      --gauge "$( echoP 'setting_easy-rsa' )" \
+                      ${SY} ${SX}
 
 
   fi
