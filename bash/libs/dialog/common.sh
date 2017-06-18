@@ -32,7 +32,7 @@
 BACK_TITLE="VERITECH - Openvpn TUI administrator"
 
 BUTTONS_SIZE=6
-MARGIN_COLS_SIZE=2
+MARGIN_COLS_SIZE=6
 
 ROWS=$(stty size | cut -f1 -d' ' )
 COLS=$(stty size | cut -f2 -d' ' )
