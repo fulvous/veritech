@@ -43,14 +43,12 @@ install_dependencies () {
   
       "7" )
 
-        $QC openvpn easy-rsa dialog python36u > /dev/null 2>&1
+        $QC openvpn easy-rsa dialog > /dev/null 2>&1
         if [ "$?" != "0" ] ; then  
           echoD "need_to_install"
           $PM install epel-release
           $PM install openvpn easy-rsa yum-utils dialog
           $PM groupinstall development
-          $PM install https://centos7.iuscommunity.org/ius-release.rpm
-          $PM install python36u
         fi
         ;;
     
@@ -68,10 +66,10 @@ install_dependencies () {
       
       "stretch/sid" ) 
 
-        $QC openvpn easy-rsa dialog python3 > /dev/null 2>&1
+        $QC openvpn easy-rsa dialog > /dev/null 2>&1
         if [ "$?" != "0" ] ; then
           echoD "need_to_install"
-          $PM install openvpn easy-rsa dialog python3
+          $PM install openvpn easy-rsa dialog
         fi
         ;;
       *) 

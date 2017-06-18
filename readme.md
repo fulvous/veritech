@@ -1,3 +1,3 @@
-#pyveritech
+# Veritech
 
 Simple openvpn tui admin
