@@ -32,7 +32,7 @@
 #include i18n
 . ./bash/libs/i18n_echo.sh
 
-BACK_TITLE=$( echoP "dialog_back_title" )
+BACK_TITLE=$( echoP 'dialog_back_title' )
 
 BUTTONS_SIZE=6
 MARGIN_COLS_SIZE=6

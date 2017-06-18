@@ -42,7 +42,8 @@ dialog_welcome () {
     SY=$ROWS
   fi
   SX=$(( $COLS - $MARGIN_COLS_SIZE ))
-  $DIALOG --yesno "$(echoP 'welcome_text')" $SY $SX
+  $DIALOG --backtitle "$BACK_TITLE" \
+          --yesno "$(echoP 'welcome_text')" $SY $SX
   EXIT_CODE=$?
 
   if [ "$EXIT_CODE" != "0" ] ; then
