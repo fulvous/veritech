@@ -37,15 +37,21 @@ install_dependencies () {
   if [ "${OS}" == "redhat" ] ; then
   
     PM="/usr/bin/yum -y"
+    QC="/usr/bin/rpm -q"
   
     case "${VER}" in
   
       "7" )
-        $PM install epel-release
-        $PM install openvpn easy-rsa yum-utils dialog
-        $PM groupinstall development
-        $PM install https://centos7.iuscommunity.org/ius-release.rpm
-        $PM install python36u
+
+        $QC openvpn easy-rsa dialog python36
+        if [ "$?" != "0" ] ; then  
+          echoD "need_to_install"
+          $PM install epel-release
+          $PM install openvpn easy-rsa yum-utils dialog
+          $PM groupinstall development
+          $PM install https://centos7.iuscommunity.org/ius-release.rpm
+          $PM install python36u
+        fi
         ;;
     
       *) 
@@ -56,11 +62,17 @@ install_dependencies () {
   elif [ "${OS}" == "debian" ] ; then
   
     PM="/usr/bin/apt-get -y"
-  
+    QC="/usr/bin/dpkg -l" 
+ 
     case "${VER}" in
       
       "stretch/sid" ) 
-        $PM install openvpn easy-rsa dialog python3
+
+        $QC openvpn easy-rsa dialog python3
+        if [ "$?" != "0" ] ; then
+          echoD "need_to_install"
+          $PM install openvpn easy-rsa dialog python3
+        fi
         ;;
       *) 
         error "os_version_not_supported"
