@@ -59,4 +59,4 @@ while getopts "v" optname ; do
   esac
 done
 
-echo "$ARCH $OS $VER"
+echoD "debug_current_platform" "$ARCH $OS $VER"
