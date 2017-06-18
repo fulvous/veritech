@@ -29,43 +29,8 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-setup_environment () {
-  
-  echo 0 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                    --gauge "$( echoP 'setting_easy-rsa' )" \
-                    ${SY} ${SX} 0
-
-  if [ "$OS" == "redhat" ] ; then
-
-    EASY_RSA="/usr/share/easy-rsa/2.0/*"
-    NEW_EASY="/etc/openvpn/easy-rsa/"
-    mkdir -p ${NEW_EASY}
-    mkdir -p ./backup
-    cp -afv ${EASY_RSA} ${NEW_EASY} | \
-      ./bash/utils/slow_pipe.sh | \
-      pv -n -l -s $(ls -l ${EASY_RSA} | wc -l) \
-      | $DIALOG --backtitle "${BACK_TITLE}" \
-      --gauge "$( echoP 'setting_easy-rsa' )" \
-      ${SY} ${SX}
-    cp -af /etc/openvpn/easy-rsa/vars ./backup/vars   
-
-  elif [ "$OS" == "debian" ] ; then
-
-    EASY_RSA="/usr/share/easy-rsa/*"    
-    NEW_EASY="/etc/openvpn/easy-rsa/"
-    mkdir -p ${NEW_EASY}
-    mkdir -p ./backup
-    cp -afv ${EASY_RSA} ${NEW_EASY} | \
-      ./bash/utils/slow_pipe.sh | \
-      pv -n -l -s $(ls -l ${EASY_RSA} | wc -l) \
-      | $DIALOG --backtitle "${BACK_TITLE}" \
-      --gauge "$( echoP 'setting_easy-rsa' )" \
-      ${SY} ${SX}
-    cp -af /etc/openvpn/easy-rsa/vars ./backup/vars   
-
-
-  fi
-
-
-
-}
+while : ; do
+  read line
+  sleep 0.2
+  echo $line
+done
