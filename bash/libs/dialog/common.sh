@@ -29,13 +29,14 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-BACK_TITLE="VERITECH - Openvpn TUI administrator"
+#include i18n
+. ./bash/libs/i18n_echo.sh
+
+BACK_TITLE=$( echoP "dialog_back_title" )
 
 BUTTONS_SIZE=6
 MARGIN_COLS_SIZE=6
 
 ROWS=$(stty size | cut -f1 -d' ' )
 COLS=$(stty size | cut -f2 -d' ' )
-
-
 
