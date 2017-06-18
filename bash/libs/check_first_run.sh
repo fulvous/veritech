@@ -35,6 +35,7 @@ check_first_run () {
   if [ -f "./data/first_run" ] ; then
     echoD "first_run"
     setup_easy-rsa
+    get_server
   fi
 
 }

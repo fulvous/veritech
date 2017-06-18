@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 # Leon Ramos
 # leon.ramos@creadoresdigitales.com
@@ -6,7 +6,7 @@
 
 #    Este programa es software libre: Usted puede redistribuirlo y/o modificarlo
 #    bajo los terminos de la licencia de uso publico general (GNU General Public License) como
-#    aparece publicada por la Fundacion de Software Libre, ya sea la version 3 de dicha licencia, o 
+#    aparece publicada por la Fundacion de Software Libre, ya sea la version 3 de dicha licencia, o
 #    a su discresion, cualquier version posterior.
 
 #    Este programa es distribuido con el objetivo de ser útil, pero sin ninguna garantia,
@@ -29,48 +29,30 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-export TEXTDOMAINDIR=./bash/locale
-export TEXTDOMAIN=veritech
-
-#import libraries
-. ./bash/libs/os_detection.sh
-. ./bash/libs/i18n_echo.sh
-. ./bash/libs/check_root.sh
-. ./bash/libs/dependencies.sh
-. ./bash/libs/check_first_run.sh
-. ./bash/libs/dialog/common.sh
-. ./bash/libs/dialog/welcome.sh
-. ./bash/libs/dialog/easy-rsa.sh
-. ./bash/libs/dialog/server_data.sh
-
-D=false
-SCRIPT=$0
-
-usage () {
-  echo "Usage: $0"
-  echo " Poner uso aqui"
+check_server () {
+  TEMP=$( echo "$1" | egrep -c "\b[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+\b" )
+  if [ $TEMP -ne 1 ] ; then
+    dialog --title "$( echoP 'wrong_data_title')" --msgbox "$( echoP 'wrong_server_address')" $SY $SX
+    ISSERVER=0
+  else
+    ISSERVER=1
+  fi
 }
 
-while getopts "v" optname ; do
-  case $optname in
-  "v")  D=true
-        echoD "getopts_debug_enabled"
-        ;;
-  "?")
-        D=true
-        error "getopts_unknown_option"
-        usage
-        ;;
-  esac
-done
 
-echoD "debug_current_platform" "$ARCH $OS $VER"
-supported_platform
+get_server () {
+  OPT=0
+  ISSERVER=0
+  while [ "$OPT" != "" ] && [ "$ISSERVER" == "0" ] ; do
+    OPT=$( dialog --stdout --title "Server name" --inputbox "Enter your server name or IP: " 10 40 "$( echoP 'your_server_name')" )
+    echo "Resultado: $?"
+    check_server "$OPT"
+  done
 
-check_root
 
-dialog_welcome
+  if [ "$OPT" == "" ] ; then
+    exit 0
+  fi
 
-install_dependencies
-
-check_first_run
+  CN=$OPT
+}
