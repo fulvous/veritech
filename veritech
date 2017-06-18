@@ -40,7 +40,7 @@ export TEXTDOMAIN=veritech
 . ./bash/libs/check_first_run.sh
 . ./bash/libs/dialog/common.sh
 . ./bash/libs/dialog/welcome.sh
-. ./bash/libs/dialog/environment.sh
+. ./bash/libs/dialog/easy-rsa.sh
 
 D=false
 SCRIPT=$0
