@@ -29,42 +29,13 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-export TEXTDOMAINDIR=./bash/locale
-export TEXTDOMAIN=pyveritech
-
-#import libraries
-. ./bash/libs/os_detection.sh
+#import i18n echo
 . ./bash/libs/i18n_echo.sh
-. ./bash/libs/check_root.sh
-. ./bash/libs/dependencies.sh
-. ./bash/libs/check_first_run.sh
 
-D=false
-SCRIPT=$0
+check_first_run () {
 
-usage () {
-  echo "Usage: $0"
-  echo " Poner uso aqui"
+  if [ -f "./data/first_run" ] ; then
+    echoD "first_run"
+  fi
+
 }
-
-while getopts "v" optname ; do
-  case $optname in
-  "v")  D=true
-        echoD "getopts_debug_enabled"
-        ;;
-  "?")
-        D=true
-        error "getopts_unknown_option"
-        usage
-        ;;
-  esac
-done
-
-echoD "debug_current_platform" "$ARCH $OS $VER"
-supported_platform
-
-check_root
-
-install_dependencies
-
-check_first_run
