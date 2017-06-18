@@ -43,7 +43,7 @@ install_dependencies () {
   
       "7" )
 
-        $QC openvpn easy-rsa dialog python36u
+        $QC openvpn easy-rsa dialog python36u > /dev/null 2>&1
         if [ "$?" != "0" ] ; then  
           echoD "need_to_install"
           $PM install epel-release
@@ -68,7 +68,7 @@ install_dependencies () {
       
       "stretch/sid" ) 
 
-        $QC openvpn easy-rsa dialog python3
+        $QC openvpn easy-rsa dialog python3 > /dev/null 2>&1
         if [ "$?" != "0" ] ; then
           echoD "need_to_install"
           $PM install openvpn easy-rsa dialog python3
