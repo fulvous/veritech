@@ -59,7 +59,7 @@ get_server () {
   fi
 
   SERVER_NAME=$OPT
-  echo "$CN" > ./data/server_name
+  echo "$SERVER_NAME" > ./data/server_name
 }
 
 get_protocol () {
