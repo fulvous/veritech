@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash  -x
 
 # Leon Ramos
 # leon.ramos@creadoresdigitales.com
