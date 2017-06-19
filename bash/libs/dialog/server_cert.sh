@@ -45,11 +45,11 @@ build_server_cert () {
     NEW_EASY="/etc/openvpn/easy-rsa/"
     VARS="${NEW_EASY}vars"
     egrep -v "$KEY_LIST" ./data/backup/vars > $VARS
-    echo "export KEY_COUNTRY='$(cat $VALUES/cert_country)'" >> $VARS
-    echo "export KEY_PROVINCE='$(cat $VALUES/cert_province)'" >> $VARS
-    echo "export KEY_CITY='$(cat $VALUES/cert_city)'" >> $VARS
-    echo "export KEY_ORG='$(cat $VALUES/cert_organization)'" >> $VARS
-    echo "export KEY_EMAIL='$(cat $VALUES/cert_email)'" >> $VARS
+    echo "export KEY_COUNTRY=\"$(cat $VALUES/cert_country)\"" >> $VARS
+    echo "export KEY_PROVINCE=\"$(cat $VALUES/cert_province)\"" >> $VARS
+    echo "export KEY_CITY=\"$(cat $VALUES/cert_city)\"" >> $VARS
+    echo "export KEY_ORG=\"$(cat $VALUES/cert_organization)\"" >> $VARS
+    echo "export KEY_EMAIL=\"$(cat $VALUES/cert_email)\"" >> $VARS
     echo "export KEY_EMAIL=$(cat $VALUES/cert_email)" >> $VARS
     echo "KEY_SIZE=$(cat $VALUES/server_key_size)" >> $VARS
     echo 10 | $DIALOG  --backtitle "${BACK_TITLE}" \
@@ -59,7 +59,7 @@ build_server_cert () {
     
     OLD_DIR=$(pwd)
     cd ${NEW_EASY}
-    source vars
+    source ./vars
     ./clean-all
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
@@ -82,7 +82,7 @@ build_server_cert () {
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
-    
+    cd ${OLD_DIR}
     
 
   elif [ "$OS" == "debian" ] ; then
@@ -90,11 +90,11 @@ build_server_cert () {
     NEW_EASY="/etc/openvpn/easy-rsa/"
     VARS="${NEW_EASY}vars"
     egrep -v "$KEY_LIST" ./data/backup/vars > $VARS
-    echo "export KEY_COUNTRY='$(cat $VALUES/cert_country)'" >> $VARS
-    echo "export KEY_PROVINCE='$(cat $VALUES/cert_province)'" >> $VARS
-    echo "export KEY_CITY='$(cat $VALUES/cert_city)'" >> $VARS
-    echo "export KEY_ORG='$(cat $VALUES/cert_organization)'" >> $VARS
-    echo "export KEY_EMAIL='$(cat $VALUES/cert_email)'" >> $VARS
+    echo "export KEY_COUNTRY=\"$(cat $VALUES/cert_country)\"" >> $VARS
+    echo "export KEY_PROVINCE=\"$(cat $VALUES/cert_province)\"" >> $VARS
+    echo "export KEY_CITY=\"$(cat $VALUES/cert_city)\"" >> $VARS
+    echo "export KEY_ORG=\"$(cat $VALUES/cert_organization)\"" >> $VARS
+    echo "export KEY_EMAIL=\"$(cat $VALUES/cert_email)\"" >> $VARS
     echo "export KEY_EMAIL=$(cat $VALUES/cert_email)" >> $VARS
     echo "KEY_SIZE=$(cat $VALUES/server_key_size)" >> $VARS
     echo 10 | $DIALOG  --backtitle "${BACK_TITLE}" \
@@ -104,7 +104,7 @@ build_server_cert () {
     
     OLD_DIR=$(pwd)
     cd ${NEW_EASY}
-    source vars
+    source ./vars
     ./clean-all
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
@@ -127,10 +127,7 @@ build_server_cert () {
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
+    cd ${OLD_DIR}
  
-
   fi
-
-
-
 }
