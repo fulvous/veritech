@@ -40,6 +40,7 @@ check_first_run () {
       get_server
       get_protocol
       get_port
+      get_key_size
       get_ou
       get_country
       get_province
