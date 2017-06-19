@@ -43,6 +43,7 @@ export TEXTDOMAIN=veritech
 . ./bash/libs/dialog/easy-rsa.sh
 . ./bash/libs/dialog/server_data.sh
 . ./bash/libs/dialog/cert_data.sh
+. ./bash/libs/dialog/server_cert.sh
 
 D=false
 SCRIPT=$0
