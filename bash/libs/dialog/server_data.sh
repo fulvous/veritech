@@ -32,7 +32,7 @@
 check_server () {
   TEMP=$( echo "$1" | egrep -c "\b[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+\b" )
   if [ $TEMP -ne 1 ] ; then
-    dialog --title "$( echoP 'wrong_data_title')" --msgbox "$( echoP 'wrong_server_address')" $SY $SX
+    $DIALOG --title "$( echoP 'wrong_data_title')" --msgbox "$( echoP 'wrong_server_address')" $SY $SX
     IS_SERVER=0
   else
     IS_SERVER=1
@@ -43,8 +43,8 @@ check_server () {
 get_server () {
   OPT=0
   IS_SERVER=0
-  while [ "$ISSERVER" == "0" ] ; do
-    OPT=$( dialog --stdout --title "$( echoP 'get_server_title' )" \
+  while [ "$IS_SERVER" == "0" ] ; do
+    OPT=$( $DIALOG --stdout --title "$( echoP 'get_server_title' )" \
             --inputbox "$( echoP 'get_server_content')" \
             10 40 "$( echoP 'your_server_name')" )
     if [ "$?" == "1" ] ; then
@@ -58,14 +58,35 @@ get_server () {
     exit 0
   fi
 
-  CN=$OPT
+  SERVER_NAME=$OPT
+  echo "$CN" > ./data/server_name
+}
+
+get_protocol () {
+  OPT=$( $DIALOG --stdout --title "$( echoP 'get_protocol_title' )" \
+          --radiolist "$( echoP 'get_protocol_content')" \
+          10 40 \
+          1 udp on \
+          2 tcp off )
+  if [ "$?" == "1" ] ; then
+    exit 0
+  fi
+
+  case "$OPT" in
+    "1") SERVER_PROTOCOL="udp"
+      ;;
+    "2") SERVER_PROTOCOL="tcp"
+      ;;
+  esac
+
+  echo "$SERVER_PROTOCOL" > ./data/server_protocol
 }
 
 
 check_port () {
   TEMP=$( echo "$1" | egrep -c "\b[0-9]+\b" )
   if [ $TEMP -ne 1 ] ; then
-    dialog --title "$( echoP 'wrong_data_title')" --msgbox "$( echoP 'wrong_port')" $SY $SX
+    $DIALOG --title "$( echoP 'wrong_data_title')" --msgbox "$( echoP 'wrong_port')" $SY $SX
     IS_PORT=0
   else
     IS_PORT=1
@@ -76,8 +97,8 @@ check_port () {
 get_port () {
   OPT=0
   IS_PORT=0
-  while [ "$ISSERVER" == "0" ] ; do
-    OPT=$( dialog --stdout --title "$( echoP 'get_port_title' )" \
+  while [ "$IS_PORT" == "0" ] ; do
+    OPT=$( $DIALOG --stdout --title "$( echoP 'get_port_title' )" \
             --inputbox "$( echoP 'get_port_content')" \
             10 40 "1194" )
     if [ "$?" == "1" ] ; then
@@ -91,5 +112,6 @@ get_port () {
     exit 0
   fi
 
-  CN=$OPT
+  SERVER_PORT=$OPT
+  echo "$SERVER_PORT" > ./data/server_port
 }

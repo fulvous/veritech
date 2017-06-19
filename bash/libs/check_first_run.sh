@@ -36,6 +36,8 @@ check_first_run () {
     echoD "first_run"
     setup_easy-rsa
     get_server
+    get_protocol
+    get_port
   fi
 
 }
