@@ -127,12 +127,19 @@ build_server_cert () {
                       ${SY} ${SX}
 
     ./build-dh > /dev/null 2>&1
+    OUT=$?
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
                       ${SY} ${SX}
     cd ${CURR_DIR}
-
+    if [ "$OUT" == "0" ] ; then
+      rm -f ./data/first_run
+      $DIALOG --backtitle "${BACK_TITLE}" \
+        --title "$(echoP 'server_cert_title')" \
+        --msgbox "$(echoP 'server_cert_successful')" \
+        $SY $SX
+    fi
      
   fi
 }
