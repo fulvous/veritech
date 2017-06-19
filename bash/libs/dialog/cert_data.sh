@@ -217,15 +217,15 @@ get_email () {
 }
 
 validate_cert () {
-  DATA="$(echoP 'country'): '$CERT_COUNTRY'\n\
+  DATA="  $(echoP 'country'): '$CERT_COUNTRY'\n\
   $(echoP 'province'): '$CERT_PROVINCE'\n\
-  City: '$CERT_CITY'\n\
-  Organization: '$CERT_ORGANIZATION'\n\
-  Department (OU): '$CERT_OU'\n\
-  E-mail: '$CERT_EMAIL'\n\
-  Server: '$SERVER_NAME'\n\
-  Protocol: '$SERVER_PROTOCOL'\n\
-  Port: '$SEVER_PORT'"
+  $(echoP 'city'): '$CERT_CITY'\n\
+  $(echoP 'organization'): '$CERT_ORGANIZATION'\n\
+  $(echoP 'department'): '$CERT_OU'\n\
+  $(echoP 'email'): '$CERT_EMAIL'\n\
+  $(echoP 'server_name'): '$SERVER_NAME'\n\
+  $(echoP 'server_protocol'): '$SERVER_PROTOCOL'\n\
+  $(echoP 'server_port'): '$SEVER_PORT'"
   $DIALOG --backtitle "$BACK_TITLE" \
     --title "$(echoP 'validate_title')" \
     --yesno "$(echoP 'validate_content'):\n\n${DATA}" \
