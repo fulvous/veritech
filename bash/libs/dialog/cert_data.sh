@@ -109,7 +109,7 @@ check_province () {
 get_province () {
   OPT=0
   IS_PROVINCE=0
-  while [ "$IS_OU" == "0" ] ; do
+  while [ "$IS_PROVINCE" == "0" ] ; do
     OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
             --title "$( echoP 'get_province_title')" \
             --inputbox "$( echoP 'get_province_content')" \
