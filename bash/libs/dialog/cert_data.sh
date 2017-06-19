@@ -46,7 +46,7 @@ get_ou () {
     OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
             --title "$( echoP 'get_ou_title')" \
             --inputbox "$( echoP 'get_ou_content')" \
-            10 40 "$( echoP 'your_ou')" )
+            $SY $SY "$( echoP 'your_ou')" )
     if [ "$?" == "1" ] ; then
       exit 0
     fi
@@ -57,3 +57,41 @@ get_ou () {
   mkdir -p ./data/values
   echo "$CERT_OU" > ./data/values/cert_ou
 }
+
+
+get_country () {
+  old_IFS=${IFS}
+  IFS=","
+  
+  declare -a countriesTag
+  declare -a countriesCode
+  while read -r -a array 
+  do 
+    countriesTag["${array[0]}"]="${array[1]}-${array[2]}"
+    countriesCode["${array[0]}"]="${array[2]}"
+  done < $COUNTRIES
+  IFS=${old_IFS}
+  
+  OPTIONS=""
+  for key in "${!countriesTag[@]}"
+  do
+    OPTIONS="$OPTIONS  ${key} ${countriesTag[${key}]}"
+  done
+
+  OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
+            --title "$( echoP 'get_country_title')" \
+            --default-item "MX" \
+            --menu "$( echoP 'get_country_content')" \
+            $SY $SX 9 \
+      $OPTIONS )
+
+  if [ "$?" == "1" ] ; then
+    exit 0
+  fi
+
+  OPT2=${countriesCode[${OPT}]}
+  CERT_COUNTRY=$OPT2
+  mkdir -p ./data/values
+  echo "$CERT_COUNTRY" > ./data/values/cert_country
+}
+

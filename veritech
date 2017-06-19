@@ -46,6 +46,7 @@ export TEXTDOMAIN=veritech
 
 D=false
 SCRIPT=$0
+COUNTRIES=./data/countries.csv
 
 usage () {
   echo "Usage: $0"

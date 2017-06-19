@@ -39,6 +39,7 @@ check_first_run () {
     get_protocol
     get_port
     get_ou
+    get_country
   fi
 
 }

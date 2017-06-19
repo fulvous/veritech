@@ -50,7 +50,7 @@ get_server () {
     OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
             --title "$( echoP 'get_server_title' )" \
             --inputbox "$( echoP 'get_server_content')" \
-            10 40 "$( echoP 'your_server_name')" )
+            $SY $SX "$( echoP 'your_server_name')" )
     if [ "$?" == "1" ] ; then
       exit 0
     fi
@@ -66,7 +66,7 @@ get_protocol () {
   OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
           --title "$( echoP 'get_protocol_title' )" \
           --radiolist "$( echoP 'get_protocol_content')" \
-          10 40 2 \
+          $SY $SX 2 \
           1 udp on \
           2 tcp off )
   if [ "$?" == "1" ] ; then
@@ -106,7 +106,7 @@ get_port () {
     OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
             --title "$( echoP 'get_port_title' )" \
             --inputbox "$( echoP 'get_port_content')" \
-            10 40 "1194" )
+            $SY $SX "1194" )
     if [ "$?" == "1" ] ; then
       exit 0
     fi
