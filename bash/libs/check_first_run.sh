@@ -49,6 +49,7 @@ check_first_run () {
       get_email
       validate_cert
     done
+    build_server_cert
   fi
 
 }
