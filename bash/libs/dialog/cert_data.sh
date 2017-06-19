@@ -80,7 +80,7 @@ get_country () {
 
   OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
             --title "$( echoP 'get_country_title')" \
-            --default-item "MX" \
+            --default-item 144 \
             --menu "$( echoP 'get_country_content')" \
             $SY $SX 9 \
       $OPTIONS )
