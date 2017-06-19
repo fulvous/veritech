@@ -34,8 +34,8 @@ KEY_LIST="(KEY_COUNTRY|KEY_PROVINCE|KEY_CITY|KEY_ORG|KEY_EMAIL|KEY_SIZE|KEY_OU)"
 setup_easy-rsa () {
   
   echo 0 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                    --title "easy-rsa_title" \
-                    --gauge "$( echoP 'easy-rsa_content' )" \
+                    --title "$(echoP 'easy-rsa_title')" \
+                    --gauge "$(echoP 'easy-rsa_content')" \
                     ${SY} ${SX}
   sleep 0.5
 
@@ -46,20 +46,20 @@ setup_easy-rsa () {
     mkdir -p ${NEW_EASY}
     mkdir -p ./data/backup
     echo 30 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                      --title "easy-rsa_title" \
+                      --title "$(echoP 'easy-rsa_title')" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
     cp -afv ${EASY_RSA} ${NEW_EASY} 
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                      --title "easy-rsa_title" \
+                      --title "$(echoP 'easy-rsa_title')" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
     cp -af /etc/openvpn/easy-rsa/vars ./data/backup/vars   
     egrep -v "$KEY_LIST" ./data/backup/vars > /etc/openvpn/easy-rsa/vars
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                      --title "easy-rsa_title" \
+                      --title "$(echoP 'easy-rsa_title')" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
@@ -71,20 +71,20 @@ setup_easy-rsa () {
     mkdir -p ${NEW_EASY}
     mkdir -p ./data/backup
     echo 30 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                      --title "easy-rsa_title" \
+                      --title "$(echoP 'easy-rsa_title')" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
     cp -afv ${EASY_RSA} ${NEW_EASY}
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                      --title "easy-rsa_title" \
+                      --title "$(echoP 'easy-rsa_title')" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
     cp -af /etc/openvpn/easy-rsa/vars ./data/backup/vars   
     egrep -v "$KEY_LIST" ./data/backup/vars > /etc/openvpn/easy-rsa/vars
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
-                      --title "easy-rsa_title" \
+                      --title "$(echoP 'easy-rsa_title')" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5

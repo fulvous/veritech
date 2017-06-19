@@ -57,9 +57,9 @@ build_server_cert () {
                       --gauge "$(echoP 'server_cert_content')" \
                       ${SY} ${SX}
     
-    OLD_DIR=$(pwd)
     cd ${NEW_EASY}
-    source ./vars && ./clean-all > /dev/null 2>&1
+    source ./vars > /dev/null 2>&1
+    ./clean-all > /dev/null 2>&1
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
@@ -84,7 +84,7 @@ build_server_cert () {
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content' )" \
                       ${SY} ${SX}
-    cd ${OLD_DIR}
+    cd ${CURR_DIR}
     
 
   elif [ "$OS" == "debian" ] ; then
@@ -104,9 +104,9 @@ build_server_cert () {
                       --gauge "$(echoP 'server_cert_content')" \
                       ${SY} ${SX}
     
-    OLD_DIR=$(pwd)
     cd ${NEW_EASY}
-    source ./vars && ./clean-all > /dev/null 2>&1
+    source ./vars > /dev/null 2>&1
+    ./clean-all > /dev/null 2>&1
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
@@ -131,7 +131,7 @@ build_server_cert () {
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
                       ${SY} ${SX}
-    cd ${OLD_DIR}
+    cd ${CURR_DIR}
 
      
   fi
