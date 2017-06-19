@@ -59,30 +59,35 @@ build_server_cert () {
     
     OLD_DIR=$(pwd)
     cd ${NEW_EASY}
-    source ./vars
-    ./clean-all
+    echo $(pwd)
+    source ./vars && ./clean-all
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
   
-    ./build-ca
+    echo $(pwd)
+    source ./vars && ./build-ca
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     
-    ./build-key-server $(cat $VALUES/server_name)
+    echo $(pwd)
+    source ./vars && ./build-key-server $(cat $VALUES/server_name)
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
-    ./build-dh
+
+    echo $(pwd)
+    source ./vars && ./build-dh
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     cd ${OLD_DIR}
+    echo $(pwd)
     
 
   elif [ "$OS" == "debian" ] ; then
@@ -104,30 +109,36 @@ build_server_cert () {
     
     OLD_DIR=$(pwd)
     cd ${NEW_EASY}
-    source ./vars
-    ./clean-all
+    echo $(pwd)
+    source ./vars && ./clean-all
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
   
-    ./build-ca
+    echo $(pwd)
+    source ./vars && ./build-ca
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     
-    ./build-key-server $(cat $VALUES/server_name)
+    echo $(pwd)
+    source ./vars && ./build-key-server $(cat $VALUES/server_name)
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
-    ./build-dh
+
+    echo $(pwd)
+    source ./vars && ./build-dh
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     cd ${OLD_DIR}
- 
+    echo $(pwd)
+
+     
   fi
 }
