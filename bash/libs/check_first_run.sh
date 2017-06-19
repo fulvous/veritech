@@ -42,6 +42,7 @@ check_first_run () {
     get_country
     get_province
     get_city
+    get_organization
   fi
 
 }

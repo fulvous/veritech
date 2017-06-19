@@ -154,3 +154,33 @@ get_city () {
   mkdir -p ./data/values
   echo "$CERT_CITY" > ./data/values/cert_city
 }
+
+check_organization () {
+  TEMP=$( echo "$1" | egrep -c "\b[a-zA-Z0-9\s.-]+\b" )
+  if [ $TEMP -ne 1 ] ; then
+    $DIALOG --title "$( echoP 'wrong_data_title')" --msgbox "$( echoP 'wrong_organization')" $SY $SX
+    IS_ORGANIZATION=0
+  else
+    IS_ORGANIZATION=1
+  fi
+}
+
+
+get_organization () {
+  OPT=0
+  IS_ORGANIZATION=0
+  while [ "$IS_ORGANIZATION" == "0" ] ; do
+    OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
+            --title "$( echoP 'get_organization_title')" \
+            --inputbox "$( echoP 'get_organization_content')" \
+            $SY $SX "$( echoP 'your_organization')" )
+    if [ "$?" == "1" ] ; then
+      exit 0
+    fi
+    check_organization "$OPT"
+  done
+  
+  CERT_ORGANIZATION=$OPT
+  mkdir -p ./data/values
+  echo "$CERT_ORGANIZATION" > ./data/values/cert_organization
+}
