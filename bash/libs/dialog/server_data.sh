@@ -149,4 +149,34 @@ get_key_size () {
   echo "$SERVER_KEY_SIZE" > ./data/values/server_key_size
 }
 
+check_server_net () {
+  TEMP=$( echo "$1" | egrep -c "\b[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\s+[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\b" )
+  if [ $TEMP -ne 1 ] ; then
+    $DIALOG --backtitle "${BACK_TITLE}" \
+     --title "$(echoP 'wrong_data_title')" \
+     --msgbox "$(echoP 'wrong_server_net')" \
+     $SY $SX
+    IS_SERVER_NET=0
+  else
+    IS_SERVER_NET=1
+  fi
+}
 
+get_server_net () {
+  OPT=0
+  IS_SERVER_NET=0
+  while [ "$IS_SERVER_NET" == "0" ] ; do
+    OPT=$( $DIALOG --stdout --backtitle "${BACK_TITLE}" \
+      --title "$(echoP 'get_server_net_title')" \
+      --inputbox "$(echoP 'get_server_net_content')" \
+      $SY $SX )
+    if [ "$?" == "1" ] ; then
+      exit 1
+    fi
+    check_server_net "$OPT"
+  done
+
+  SERVER_NET=$OPT 
+  mkdir -p ./data/values
+  echo "$SERVER_NET" > ./data/values/server_net
+}
