@@ -51,7 +51,7 @@ build_server_cert () {
     echo "export KEY_ORG=\"$(cat $VALUES/cert_organization)\"" >> $VARS
     echo "export KEY_EMAIL=\"$(cat $VALUES/cert_email)\"" >> $VARS
     echo "export KEY_EMAIL=$(cat $VALUES/cert_email)" >> $VARS
-    echo "KEY_SIZE=$(cat $VALUES/server_key_size)" >> $VARS
+    echo "export KEY_SIZE=\"$(cat $VALUES/server_key_size)\"" >> $VARS
     echo 10 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
@@ -59,35 +59,30 @@ build_server_cert () {
     
     OLD_DIR=$(pwd)
     cd ${NEW_EASY}
-    echo $(pwd)
     source ./vars && ./clean-all
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
   
-    echo $(pwd)
-    source ./vars && ./build-ca
+    ./build-ca
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     
-    echo $(pwd)
-    source ./vars && ./build-key-server $(cat $OLD_DIR/$VALUES/server_name)
+    ./build-key-server $(cat $OLD_DIR/$VALUES/server_name)
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
 
-    echo $(pwd)
-    source ./vars && ./build-dh
+    ./build-dh
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     cd ${OLD_DIR}
-    echo $(pwd)
     
 
   elif [ "$OS" == "debian" ] ; then
@@ -101,7 +96,7 @@ build_server_cert () {
     echo "export KEY_ORG=\"$(cat $VALUES/cert_organization)\"" >> $VARS
     echo "export KEY_EMAIL=\"$(cat $VALUES/cert_email)\"" >> $VARS
     echo "export KEY_EMAIL=$(cat $VALUES/cert_email)" >> $VARS
-    echo "KEY_SIZE=$(cat $VALUES/server_key_size)" >> $VARS
+    echo "export KEY_SIZE=\"$(cat $VALUES/server_key_size)\"" >> $VARS
     echo 10 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
@@ -109,34 +104,30 @@ build_server_cert () {
     
     OLD_DIR=$(pwd)
     cd ${NEW_EASY}
-    $( cd ${NEW_EASY} && source ./vars && ./clean-all )
+    source ./vars && ./clean-all
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
   
-    echo $(pwd)
-    $( cd ${NEW_EASY} && source ./vars && ./build-ca )
+    ./build-ca
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     
-    echo $(pwd)
-    $( cd ${NEW_EASY} && source ./vars && ./build-key-server $(cat $OLD_DIR/$VALUES/server_name) )
+    ./build-key-server $(cat $OLD_DIR/$VALUES/server_name)
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
 
-    echo $(pwd)
-    $( cd ${NEW_EASY} && source ./vars && ./build-dh )
+    ./build-dh
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     cd ${OLD_DIR}
-    echo $(pwd)
 
      
   fi
