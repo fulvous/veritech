@@ -28,17 +28,32 @@
 
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
-check_first_run () {
-
-  if [ -f "./data/first_run" ] ; then
-    echoD "first_run"
-    setup_easy-rsa
-    get_server
-    get_protocol
-    get_port
-    get_ou
+check_ou () {
+  TEMP=$( echo "$1" | egrep -c "\b[a-zA-Z0-9.-]+\b" )
+  if [ $TEMP -ne 1 ] ; then
+    $DIALOG --title "$( echoP 'wrong_data_title')" --msgbox "$( echoP 'wrong_ou')" $SY $SX
+    IS_OU=0
+  else
+    IS_OU=1
   fi
+}
 
+
+get_ou () {
+  OPT=0
+  IS_OU=0
+  while [ "$IS_OU" == "0" ] ; do
+    OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
+            --title "$( echoP 'get_ou_title')" \
+            --inputbox "$( echoP 'get_ou_content')" \
+            10 40 "$( echoP 'your_ou')" )
+    if [ "$?" == "1" ] ; then
+      exit 0
+    fi
+    check_ou "$OPT"
+  done
+  
+  CERT_OU=$OPT
+  mkdir -p ./data/values
+  echo "$CERT_OU" > ./data/values/cert_ou
 }
