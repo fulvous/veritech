@@ -59,27 +59,27 @@ build_server_cert () {
     
     OLD_DIR=$(pwd)
     cd ${NEW_EASY}
-    source ./vars && ./clean-all
+    source ./vars && ./clean-all > /dev/null 2>&1
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
   
     export EASY_RSA="${EASY_RSA:-.}"
-    "$EASY_RSA/pkitool" --initca $*
+    "$EASY_RSA/pkitool" --initca $* > /dev/null 2>&1
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     
     export EASY_RSA="${EASY_RSA:-.}"
-    "$EASY_RSA/pkitool" --server $(cat $OLD_DIR/$VALUES/server_name)
+    "$EASY_RSA/pkitool" --server $(cat $OLD_DIR/$VALUES/server_name) > /dev/null 2>&1
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
 
-    ./build-dh
+    ./build-dh > /dev/null 2>&1
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
@@ -106,27 +106,27 @@ build_server_cert () {
     
     OLD_DIR=$(pwd)
     cd ${NEW_EASY}
-    source ./vars && ./clean-all
+    source ./vars && ./clean-all > /dev/null 2>&1
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
   
     export EASY_RSA="${EASY_RSA:-.}"
-    "$EASY_RSA/pkitool" --initca $*
+    "$EASY_RSA/pkitool" --initca $* > /dev/null 2>&1
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     
     export EASY_RSA="${EASY_RSA:-.}"
-    "$EASY_RSA/pkitool" --server $(cat $OLD_DIR/$VALUES/server_name)
+    "$EASY_RSA/pkitool" --server $(cat $OLD_DIR/$VALUES/server_name) > /dev/null 2>&1
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
 
-    ./build-dh
+    ./build-dh > /dev/null 2>&1
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
