@@ -29,7 +29,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 check_ou () {
-  TEMP=$( echo "$1" | egrep -c "\b[a-zA-Z0-9.-]+\b" )
+  TEMP=$( echo "$1" | egrep -c "\b[a-zA-Z0-9\s.-]+\b" )
   if [ $TEMP -ne 1 ] ; then
     $DIALOG --title "$( echoP 'wrong_data_title')" --msgbox "$( echoP 'wrong_ou')" $SY $SX
     IS_OU=0
