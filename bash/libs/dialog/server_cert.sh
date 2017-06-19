@@ -109,29 +109,28 @@ build_server_cert () {
     
     OLD_DIR=$(pwd)
     cd ${NEW_EASY}
-    echo $(pwd)
-    source ./vars && ./clean-all
+    $( cd ${NEW_EASY} && source ./vars && ./clean-all )
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
   
     echo $(pwd)
-    source ./vars && ./build-ca
+    $( cd ${NEW_EASY} && source ./vars && ./build-ca )
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     
     echo $(pwd)
-    source ./vars && ./build-key-server $(cat $VALUES/server_name)
+    $( cd ${NEW_EASY} && source ./vars && ./build-key-server $(cat $VALUES/server_name) )
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
 
     echo $(pwd)
-    source ./vars && ./build-dh
+    $( cd ${NEW_EASY} && source ./vars && ./build-dh )
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
