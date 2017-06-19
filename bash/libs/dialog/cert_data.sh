@@ -225,7 +225,7 @@ validate_cert () {
   $(echoP 'email'): '$CERT_EMAIL'\n\
   $(echoP 'server_name'): '$SERVER_NAME'\n\
   $(echoP 'server_protocol'): '$SERVER_PROTOCOL'\n\
-  $(echoP 'server_port'): '$SEVER_PORT'"
+  $(echoP 'server_port'): '$SERVER_PORT'"
   $DIALOG --backtitle "$BACK_TITLE" \
     --title "$(echoP 'validate_title')" \
     --yesno "$(echoP 'validate_content'):\n\n${DATA}" \
