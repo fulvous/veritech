@@ -31,7 +31,7 @@
 
 KEY_LIST="(KEY_COUNTRY|KEY_PROVINCE|KEY_CITY|KEY_ORG|KEY_EMAIL|KEY_SIZE|KEY_OU)"
 
-VALUES="./data/values"
+VALUES="data/values"
 
 build_server_cert () {
   
@@ -74,7 +74,7 @@ build_server_cert () {
                       ${SY} ${SX}
     
     echo $(pwd)
-    source ./vars && ./build-key-server $(cat $VALUES/server_name)
+    source ./vars && ./build-key-server $(cat $OLD_DIR/$VALUES/server_name)
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
@@ -123,7 +123,7 @@ build_server_cert () {
                       ${SY} ${SX}
     
     echo $(pwd)
-    $( cd ${NEW_EASY} && source ./vars && ./build-key-server $(cat $VALUES/server_name) )
+    $( cd ${NEW_EASY} && source ./vars && ./build-key-server $(cat $OLD_DIR/$VALUES/server_name) )
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
