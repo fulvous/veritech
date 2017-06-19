@@ -46,7 +46,7 @@ get_ou () {
     OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
             --title "$( echoP 'get_ou_title')" \
             --inputbox "$( echoP 'get_ou_content')" \
-            $SY $SY "$( echoP 'your_ou')" )
+            $SY $SX "$( echoP 'your_ou')" )
     if [ "$?" == "1" ] ; then
       exit 0
     fi

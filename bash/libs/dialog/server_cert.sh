@@ -72,7 +72,8 @@ build_server_cert () {
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     
-    ./build-key-server $(cat $OLD_DIR/$VALUES/server_name)
+    export EASY_RSA="${EASY_RSA:-.}"
+    "$EASY_RSA/pkitool" --server $(cat $OLD_DIR/$VALUES/server_name)
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
@@ -118,7 +119,8 @@ build_server_cert () {
                       --gauge "$( echoP 'server_cert_content' )" \
                       ${SY} ${SX}
     
-    ./build-key-server $(cat $OLD_DIR/$VALUES/server_name)
+    export EASY_RSA="${EASY_RSA:-.}"
+    "$EASY_RSA/pkitool" --server $(cat $OLD_DIR/$VALUES/server_name)
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "server_cert_title" \
                       --gauge "$( echoP 'server_cert_content' )" \
