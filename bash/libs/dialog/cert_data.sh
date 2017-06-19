@@ -113,7 +113,7 @@ get_province () {
     OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
             --title "$( echoP 'get_province_title')" \
             --inputbox "$( echoP 'get_province_content')" \
-            $SY $SY "$( echoP 'your_province')" )
+            $SY $SX "$( echoP 'your_province')" )
     if [ "$?" == "1" ] ; then
       exit 0
     fi
