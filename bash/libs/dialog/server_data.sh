@@ -117,3 +117,36 @@ get_port () {
   mkdir -p ./data/values
   echo "$SERVER_PORT" > ./data/values/server_port
 }
+
+get_key_size () {
+  OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
+          --title "$( echoP 'get_key_size_title' )" \
+          --radiolist "$( echoP 'get_key_size_content')" \
+          $SY $SX 5 \
+          1 128 off \
+          2 512 off \
+          3 1024 off \
+          4 2048 off \
+          5 4096 on )
+  if [ "$?" == "1" ] ; then
+    exit 0
+  fi
+
+  case "$OPT" in
+    "1") SERVER_KEY_SIZE="128"
+      ;;
+    "2") SERVER_KEY_SIZE="512"
+      ;;
+    "3") SERVER_KEY_SIZE="1024"
+      ;;
+    "4") SERVER_KEY_SIZE="2048"
+      ;;
+    "5") SERVER_KEY_SIZE="4096"
+      ;;
+  esac
+
+  mkdir -p ./data/values
+  echo "$SERVER_KEY_SIZE" > ./data/values/server_key_size
+}
+
+
