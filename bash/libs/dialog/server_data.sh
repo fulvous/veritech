@@ -65,7 +65,7 @@ get_server () {
 get_protocol () {
   OPT=$( $DIALOG --stdout --title "$( echoP 'get_protocol_title' )" \
           --radiolist "$( echoP 'get_protocol_content')" \
-          10 40 \
+          10 40 2 \
           1 udp on \
           2 tcp off )
   if [ "$?" == "1" ] ; then
