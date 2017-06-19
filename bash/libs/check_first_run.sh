@@ -40,6 +40,7 @@ check_first_run () {
     get_port
     get_ou
     get_country
+    get_province
   fi
 
 }
