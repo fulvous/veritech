@@ -138,8 +138,8 @@ check_city () {
 
 get_city () {
   OPT=0
-  IS_OU=0
-  while [ "$IS_OU" == "0" ] ; do
+  IS_CITY=0
+  while [ "$IS_CITY" == "0" ] ; do
     OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
             --title "$( echoP 'get_city_title')" \
             --inputbox "$( echoP 'get_city_content')" \
