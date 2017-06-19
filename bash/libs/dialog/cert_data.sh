@@ -95,3 +95,32 @@ get_country () {
   echo "$CERT_COUNTRY" > ./data/values/cert_country
 }
 
+check_province () {
+  TEMP=$( echo "$1" | egrep -c "\b[a-zA-Z0-9\s.-]+\b" )
+  if [ $TEMP -ne 1 ] ; then
+    $DIALOG --title "$( echoP 'wrong_data_title')" --msgbox "$( echoP 'wrong_province')" $SY $SX
+    IS_OU=0
+  else
+    IS_OU=1
+  fi
+}
+
+
+get_province () {
+  OPT=0
+  IS_OU=0
+  while [ "$IS_OU" == "0" ] ; do
+    OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
+            --title "$( echoP 'get_province_title')" \
+            --inputbox "$( echoP 'get_province_content')" \
+            $SY $SY "$( echoP 'your_province')" )
+    if [ "$?" == "1" ] ; then
+      exit 0
+    fi
+    check_province "$OPT"
+  done
+  
+  CERT_PROVINCE=$OPT
+  mkdir -p ./data/values
+  echo "$CERT_PROVINCE" > ./data/values/cert_province
+}
