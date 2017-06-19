@@ -41,6 +41,7 @@ check_first_run () {
     get_ou
     get_country
     get_province
+    get_city
   fi
 
 }

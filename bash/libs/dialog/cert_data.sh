@@ -99,16 +99,16 @@ check_province () {
   TEMP=$( echo "$1" | egrep -c "\b[a-zA-Z0-9\s.-]+\b" )
   if [ $TEMP -ne 1 ] ; then
     $DIALOG --title "$( echoP 'wrong_data_title')" --msgbox "$( echoP 'wrong_province')" $SY $SX
-    IS_OU=0
+    IS_PROVINCE=0
   else
-    IS_OU=1
+    IS_PROVINCE=1
   fi
 }
 
 
 get_province () {
   OPT=0
-  IS_OU=0
+  IS_PROVINCE=0
   while [ "$IS_OU" == "0" ] ; do
     OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
             --title "$( echoP 'get_province_title')" \
@@ -123,4 +123,34 @@ get_province () {
   CERT_PROVINCE=$OPT
   mkdir -p ./data/values
   echo "$CERT_PROVINCE" > ./data/values/cert_province
+}
+
+check_city () {
+  TEMP=$( echo "$1" | egrep -c "\b[a-zA-Z0-9\s.-]+\b" )
+  if [ $TEMP -ne 1 ] ; then
+    $DIALOG --title "$( echoP 'wrong_data_title')" --msgbox "$( echoP 'wrong_city')" $SY $SX
+    IS_CITY=0
+  else
+    IS_CITY=1
+  fi
+}
+
+
+get_city () {
+  OPT=0
+  IS_OU=0
+  while [ "$IS_OU" == "0" ] ; do
+    OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
+            --title "$( echoP 'get_city_title')" \
+            --inputbox "$( echoP 'get_city_content')" \
+            $SY $SX "$( echoP 'your_city')" )
+    if [ "$?" == "1" ] ; then
+      exit 0
+    fi
+    check_city "$OPT"
+  done
+  
+  CERT_CITY=$OPT
+  mkdir -p ./data/values
+  echo "$CERT_CITY" > ./data/values/cert_city
 }
