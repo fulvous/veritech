@@ -59,7 +59,8 @@ get_server () {
   fi
 
   SERVER_NAME=$OPT
-  echo "$SERVER_NAME" > ./data/server_name
+  mkdir -p ./data/values
+  echo "$SERVER_NAME" > ./data/values/server_name
 }
 
 get_protocol () {
@@ -79,7 +80,8 @@ get_protocol () {
       ;;
   esac
 
-  echo "$SERVER_PROTOCOL" > ./data/server_protocol
+  mkdir -p ./data/values
+  echo "$SERVER_PROTOCOL" > ./data/values/server_protocol
 }
 
 
@@ -113,5 +115,6 @@ get_port () {
   fi
 
   SERVER_PORT=$OPT
-  echo "$SERVER_PORT" > ./data/server_port
+  mkdir -p ./data/values
+  echo "$SERVER_PORT" > ./data/values/server_port
 }
