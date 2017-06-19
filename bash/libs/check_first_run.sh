@@ -35,15 +35,19 @@ check_first_run () {
   if [ -f "./data/first_run" ] ; then
     echoD "first_run"
     setup_easy-rsa
-    get_server
-    get_protocol
-    get_port
-    get_ou
-    get_country
-    get_province
-    get_city
-    get_organization
-    get_email
+    DATA_OK="false"
+    while [ "$DATA_OK" == "false" ] ; do
+      get_server
+      get_protocol
+      get_port
+      get_ou
+      get_country
+      get_province
+      get_city
+      get_organization
+      get_email
+      validate_cert
+    done
   fi
 
 }

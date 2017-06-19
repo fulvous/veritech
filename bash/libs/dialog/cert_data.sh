@@ -215,3 +215,22 @@ get_email () {
   mkdir -p ./data/values
   echo "$CERT_EMAIL" > ./data/values/cert_email
 }
+
+validate_cert () {
+  DATA="$(echoP 'country'): '$CERT_COUNTRY'\n\
+  $(echoP 'province'): '$CERT_PROVINCE'\n\
+  City: '$CERT_CITY'\n\
+  Organization: '$CERT_ORGANIZATION'\n\
+  Department (OU): '$CERT_OU'\n\
+  E-mail: '$CERT_EMAIL'\n\
+  Server: '$SERVER_NAME'\n\
+  Protocol: '$SERVER_PROTOCOL'\n\
+  Port: '$SEVER_PORT'"
+  $DIALOG --backtitle "$BACK_TITLE" \
+    --title "$(echoP 'validate_title')" \
+    --yesno "$(echoP 'validate_content'):\n\n${DATA}" \
+    $SY $SX
+  if [ "$?" == "0" ] ; then
+    DATA_OK="true"
+  fi
+}
