@@ -43,6 +43,7 @@ check_first_run () {
     get_province
     get_city
     get_organization
+    get_email
   fi
 
 }

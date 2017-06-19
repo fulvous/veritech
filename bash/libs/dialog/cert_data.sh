@@ -184,3 +184,34 @@ get_organization () {
   mkdir -p ./data/values
   echo "$CERT_ORGANIZATION" > ./data/values/cert_organization
 }
+
+
+check_email () {
+  TEMP=$( echo "$1" | egrep -c "\b[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+\b" )
+  if [ $TEMP -ne 1 ] ; then
+    $DIALOG --title "$( echoP 'wrong_data_title')" --msgbox "$( echoP 'wrong_email')" $SY $SX
+    IS_EMAIL=0
+  else
+    IS_EMAIL=1
+  fi
+}
+
+
+get_email () {
+  OPT=0
+  IS_EMAIL=0
+  while [ "$IS_EMAIL" == "0" ] ; do
+    OPT=$( $DIALOG --stdout --backtitle "$BACK_TITLE" \
+            --title "$( echoP 'get_email_title')" \
+            --inputbox "$( echoP 'get_email_content')" \
+            $SY $SX "$( echoP 'your_email')" )
+    if [ "$?" == "1" ] ; then
+      exit 0
+    fi
+    check_email "$OPT"
+  done
+  
+  CERT_EMAIL=$OPT
+  mkdir -p ./data/values
+  echo "$CERT_EMAIL" > ./data/values/cert_email
+}
