@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 
 # Leon Ramos
 # leon.ramos@creadoresdigitales.com
@@ -29,13 +29,35 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+menu () {
+  OPT=0
+  while [ "$OPT" != "3" ]  do
+    OPT=$( dialog --stdout --title "MENU" --menu "choose_action" $SY $SX 3 \
+      1 "$(echoP 'create_client_cert')" \
+      2 "$(echoP 'erase_server_cert')" \
+      3 "$(echoP 'exit')" )
 
-check_first_run () {
+    if [ "$?" == "1" ] ; then
+      exit 0
+    fi
 
-  if [ -f "./data/first_run" ] ; then
-    echoD "first_run"
-    create_ca
-    rm -f ./data/first_run
-  fi
-
+    case $OPT in
+      1)
+        #create_client_cert
+        ;;
+      2)
+        #erase_server_cert
+        #create_ca
+        ;;
+      3) 
+        exit 0
+        ;;
+      *)
+        $DIALOG --backtitle "${BACK_TITLE}" \
+                --title "$( echoP 'wrong_data_title')" \
+                --msgbox "$( echoP 'getopts_unknown_option')"
+                $SY $SX
+        ;;
+    esac
+  done
 }

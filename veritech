@@ -38,6 +38,7 @@ export TEXTDOMAIN=veritech
 . ./bash/libs/i18n_echo.sh
 . ./bash/libs/check_root.sh
 . ./bash/libs/dependencies.sh
+. ./bash/libs/actions.sh
 . ./bash/libs/check_first_run.sh
 . ./bash/libs/dialog/common.sh
 . ./bash/libs/dialog/welcome.sh
@@ -45,6 +46,7 @@ export TEXTDOMAIN=veritech
 . ./bash/libs/dialog/server_data.sh
 . ./bash/libs/dialog/cert_data.sh
 . ./bash/libs/dialog/server_cert.sh
+. ./bash/libs/dialog/menu.sh
 
 D=false
 SCRIPT=$0
@@ -78,3 +80,5 @@ dialog_welcome
 install_dependencies
 
 check_first_run
+
+menu

@@ -87,7 +87,6 @@ build_server_cert () {
                       ${SY} ${SX}
     cd ${CURR_DIR}
     if [ "$OUT" == "0" ] ; then
-      rm -f ./data/first_run
       $DIALOG --backtitle "${BACK_TITLE}" \
         --title "$(echoP 'server_cert_title')" \
         --msgbox "$(echoP 'server_cert_successful')" \
@@ -142,7 +141,6 @@ build_server_cert () {
                       ${SY} ${SX}
     cd ${CURR_DIR}
     if [ "$OUT" == "0" ] ; then
-      rm -f ./data/first_run
       $DIALOG --backtitle "${BACK_TITLE}" \
         --title "$(echoP 'server_cert_title')" \
         --msgbox "$(echoP 'server_cert_successful')" \

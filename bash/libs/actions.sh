@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 
 # Leon Ramos
 # leon.ramos@creadoresdigitales.com
@@ -29,13 +29,22 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-check_first_run () {
-
-  if [ -f "./data/first_run" ] ; then
-    echoD "first_run"
-    create_ca
-    rm -f ./data/first_run
-  fi
-
+create_ca () {
+    setup_easy-rsa
+    DATA_OK="false"
+    while [ "$DATA_OK" == "false" ] ; do
+      get_server
+      get_protocol
+      get_port
+      get_server_net
+      get_key_size
+      get_ou
+      get_country
+      get_province
+      get_city
+      get_organization
+      get_email
+      validate_cert
+    done
+    build_server_cert
 }
