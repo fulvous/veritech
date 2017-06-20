@@ -29,7 +29,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-CURR_DIR=$(pwd)
+CURR_DIR="$(pwd)"
 export TEXTDOMAINDIR=$CURR_DIR/bash/locale
 export TEXTDOMAIN=veritech
 
@@ -75,7 +75,7 @@ supported_platform
 
 check_root
 
-dialog_welcome
+welcome
 
 install_dependencies
 
