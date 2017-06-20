@@ -47,6 +47,7 @@ export TEXTDOMAIN=veritech
 . ./bash/libs/dialog/cert_data.sh
 . ./bash/libs/dialog/server_cert.sh
 . ./bash/libs/dialog/main_menu.sh
+. ./bash/libs/dialog/main_menu.sh
 
 D=false
 SCRIPT=$0
