@@ -32,7 +32,7 @@
 
 main_menu () {
   OPT=0
-  while [ "$OPT" != "3" ]  do
+  while [ "$OPT" != "3" ] ; do
     OPT=$( dialog --stdout --title "MENU" --menu "choose_action" $SY $SX 3 \
       1 "$(echoP 'create_client_cert')" \
       2 "$(echoP 'erase_server_cert')" \
