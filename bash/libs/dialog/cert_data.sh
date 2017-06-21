@@ -224,8 +224,6 @@ validate_cert () {
   $(echoP 'department'): '$CERT_OU'\n\
   $(echoP 'email'): '$CERT_EMAIL'\n\
   $(echoP 'server_name'): '$SERVER_NAME'\n\
-  $(echoP 'server_protocol'): '$SERVER_PROTOCOL'\n\
-  $(echoP 'server_port'): '$SERVER_PORT'\n\
   $(echoP 'key_size'): '$SERVER_KEY_SIZE'\n"
   $DIALOG --backtitle "$BACK_TITLE" \
     --title "$(echoP 'validate_title')" \

@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 # Leon Ramos
 # leon.ramos@creadoresdigitales.com
@@ -29,33 +29,4 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-create_ca () {
-  setup_easy-rsa
-  DATA_OK="false"
-  while [ "$DATA_OK" == "false" ] ; do
-    get_server
-    get_key_size
-    get_ou
-    get_country
-    get_province
-    get_city
-    get_organization
-    get_email
-    validate_cert
-  done
-  build_server_cert
-}
 
-create_server_conf () {
-  DATA_OK="false" 
-  while [ "$DATA_OK" == "false" ] ; do
-    get_protocol
-    get_port
-    get_server_net
-    get_device
-    get_dns
-    get_gateway
-    validate_server_config
-  done
-  build_server_config
-}
