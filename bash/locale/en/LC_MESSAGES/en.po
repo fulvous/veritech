@@ -127,7 +127,7 @@ msgstr "Wrong server network notation, please use something like: 172.16.32.0 25
 msgid "get_server_net_title"
 msgstr "Server network"
 msgid "get_server_net_content"
-msgstr "Enter your server vpn network in the following notation (network mask): 10.1.0.0 255.255.255.0"
+msgstr "Enter the dynamic pool in the following notation (first-ip last-ip mask): 10.1.0.1 10.1.0.100 255.255.255.0"
 msgid "choose_action"
 msgstr "Choose an action:"
 msgid "create_client_cert"
