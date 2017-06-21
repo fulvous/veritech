@@ -339,6 +339,7 @@ validate_server_config () {
 build_server_config () {
   KEYS_PATH="/etc/openvpn/easy-rsa/keys"
   SERVER_CONFIG_FILE="/etc/openvpn/server.conf"
+  > ${SERVER_CONFIG_FILE}
   cat ./data/values/server_port > ${SERVER_CONFIG_FILE}
   cat ./data/values/server_protocol >> ${SERVER_CONFIG_FILE}
   cat ./data/values/server_device >> ${SERVER_CONFIG_FILE}
@@ -359,5 +360,4 @@ build_server_config () {
   echo "comp-lzo" >> ${SERVER_CONFIG_FILE}
   echo "status /var/log/openvpn.log" >> ${SERVER_CONFIG_FILE}
   echo "verb 3" >> ${SERVER_CONFIG_FILE}
-  echo "explicit-exit-notify 1" >> ${SERVER_CONFIG_FILE}
 }
