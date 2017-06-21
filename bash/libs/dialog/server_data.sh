@@ -81,7 +81,7 @@ get_protocol () {
   esac
 
   mkdir -p ./data/values
-  echo "proto $SERVER_PROTOCOL\n" > ./data/values/server_protocol
+  echo "proto $SERVER_PROTOCOL" > ./data/values/server_protocol
 }
 
 
@@ -104,7 +104,7 @@ get_device () {
   esac
 
   mkdir -p ./data/values
-  echo "dev $SERVER_DEVICE\n" > ./data/values/server_device
+  echo "dev $SERVER_DEVICE" > ./data/values/server_device
 }
 
 
@@ -139,7 +139,7 @@ get_port () {
 
   SERVER_PORT=$OPT
   mkdir -p ./data/values
-  echo "port $SERVER_PORT\n" > ./data/values/server_port
+  echo "port $SERVER_PORT" > ./data/values/server_port
 }
 
 get_key_size () {
@@ -202,7 +202,7 @@ get_server_pool () {
 
   SERVER_POOL=$OPT 
   mkdir -p ./data/values
-  echo "ifconfig-pool $SERVER_POOL\n" > ./data/values/server_pool
+  echo "ifconfig-pool $SERVER_POOL" > ./data/values/server_pool
 
   SERVER_IP=$( echo ${SERVER_POOL} | egrep -o '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.' )
   SERVER_IP="${SERVER_IP}.1"
@@ -239,7 +239,7 @@ get_dns () {
 
   SERVER_DNS=$OPT
   mkdir -p ./data/values
-  echo "push \"dhcp-option DNS $SERVER_DNS\"\n" > ./data/values/server_dns
+  echo "push \"dhcp-option DNS $SERVER_DNS\"" > ./data/values/server_dns
 }
 
 get_gateway () {
@@ -254,7 +254,7 @@ get_gateway () {
   fi
 
   case "$OPT" in
-    "1") SERVER_GATEWAY="push \"route-gateway ${SERVER_IP}\"\n"
+    "1") SERVER_GATEWAY="push \"route-gateway ${SERVER_IP}\""
       ;;
     "2") SERVER_GATEWAY=""
       get_static_route
@@ -298,12 +298,12 @@ get_static_route () {
     SERVER_STATIC_ROUTE=$OPT 
     mkdir -p ./data/values
     if [ "${FIRST_ROUTE}" == "1" ] ; then
-      echo "push \"route $SERVER_STATIC_ROUTE\"\n" > ./data/values/server_static_route
-      SERVER_ROUTES="${SERVER_STATIC_ROUTE}\n"
+      echo "push \"route $SERVER_STATIC_ROUTE\"" > ./data/values/server_static_route
+      SERVER_ROUTES="${SERVER_STATIC_ROUTE}"
       FIRST_ROUTE=0
     else
-      SERVER_ROUTES="${SERVER_ROUTES}\n${SERVER_STATIC_ROUTE}\n"
-      echo "push \"route $SERVER_STATIC_ROUTE\"\n" >> ./data/values/server_static_route
+      SERVER_ROUTES="${SERVER_ROUTES}${SERVER_STATIC_ROUTE}"
+      echo "push \"route $SERVER_STATIC_ROUTE\"" >> ./data/values/server_static_route
     fi
 
     $DIALOG --stdout --backtitle "${BACK_TITLE}" \
@@ -319,7 +319,7 @@ get_static_route () {
 }
 
 validate_server_config () {
-  DATA="  $(echoP 'server_ip'): '$SERVER_IP'\n\
+  DATA="  $(echoP 'server_ip'): '$SERVER_IP'n\
   $(echoP 'server_port'): '$SERVER_PORT'\n\
   $(echoP 'server_device'): '$SERVER_DEVICE'\n\
   $(echoP 'server_protocol'): '$SERVER_PROTOCOL'\n\
@@ -342,20 +342,20 @@ build_server_config () {
   cat ./data/values/server_port > ${SERVER_CONFIG_FILE}
   cat ./data/values/server_protocol >> ${SERVER_CONFIG_FILE}
   cat ./data/values/server_device >> ${SERVER_CONFIG_FILE}
-  echo "ca ${KEYS_PATH}/ca.crt\n" >> ${SERVER_CONFIG_FILE}
-  echo "cert ${KEYS_PATH}/server.crt\n" >> ${SERVER_CONFIG_FILE}
-  echo "key ${KEYS_PATH}/server.key\n" >> ${SERVER_CONFIG_FILE}
-  echo "dh ${KEYS_PATH}/dh$(cat ./data/values/server_key_size).pem\n" >> ${SERVER_CONFIG_FILE}
-  echo "topology subnet\n" >> ${SERVER_CONFIG_FILE}
-  echo "push \"topology subnet\"\n" >> ${SERVER_CONFIG_FILE}
+  echo "ca ${KEYS_PATH}/ca.crt" >> ${SERVER_CONFIG_FILE}
+  echo "cert ${KEYS_PATH}/server.crt" >> ${SERVER_CONFIG_FILE}
+  echo "key ${KEYS_PATH}/server.key" >> ${SERVER_CONFIG_FILE}
+  echo "dh ${KEYS_PATH}/dh$(cat ./data/values/server_key_size).pem" >> ${SERVER_CONFIG_FILE}
+  echo "topology subnet" >> ${SERVER_CONFIG_FILE}
+  echo "push \"topology subnet\"" >> ${SERVER_CONFIG_FILE}
   cat ./data/values/server_static_route >> ${SERVER_CONFIG_FILE}
   cat ./data/values/server_gateway >> ${SERVER_CONFIG_FILE}
   cat ./data/values/server_pool >> ${SERVER_CONFIG_FILE}
-  echo "client-config-dir /etc/openvpn/ccd\n" >> ${SERVER_CONFIG_FILE}
+  echo "client-config-dir /etc/openvpn/ccd" >> ${SERVER_CONFIG_FILE}
   cat ./data/values/server_dns >> ${SERVER_CONFIG_FILE}
-  echo "keepalive 10 120\n" >> ${SERVER_CONFIG_FILE}
-  echo "comp-lzo\n" >> ${SERVER_CONFIG_FILE}
-  echo "status /var/log/openvpn.log\n" >> ${SERVER_CONFIG_FILE}
-  echo "verb 3\n" >> ${SERVER_CONFIG_FILE}
-  echo "explicit-exit-notify 1\n" >> ${SERVER_CONFIG_FILE}
+  echo "keepalive 10 120" >> ${SERVER_CONFIG_FILE}
+  echo "comp-lzo" >> ${SERVER_CONFIG_FILE}
+  echo "status /var/log/openvpn.log" >> ${SERVER_CONFIG_FILE}
+  echo "verb 3" >> ${SERVER_CONFIG_FILE}
+  echo "explicit-exit-notify 1" >> ${SERVER_CONFIG_FILE}
 }
