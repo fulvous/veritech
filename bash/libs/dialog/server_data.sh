@@ -319,7 +319,7 @@ get_static_route () {
 }
 
 validate_server_config () {
-  DATA="  $(echoP 'server_ip'): '$SERVER_IP'n\
+  DATA="  $(echoP 'server_ip'): '$SERVER_IP'\n\
   $(echoP 'server_port'): '$SERVER_PORT'\n\
   $(echoP 'server_device'): '$SERVER_DEVICE'\n\
   $(echoP 'server_protocol'): '$SERVER_PROTOCOL'\n\
