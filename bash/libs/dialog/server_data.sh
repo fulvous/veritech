@@ -205,7 +205,7 @@ get_server_pool () {
   echo "ifconfig-pool $SERVER_POOL" > ./data/values/server_pool
 
   SERVER_IP=$( echo ${SERVER_POOL} | egrep -o '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.' )
-  SERVER_IP="${SERVER_IP}.1"
+  SERVER_IP="${SERVER_IP}1"
   echo "$SERVER_IP" > ./data/values/server_ip
 }
 
