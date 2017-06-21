@@ -343,6 +343,7 @@ build_server_config () {
   cat ./data/values/server_protocol >> ${SERVER_CONFIG_FILE}
   cat ./data/values/server_device >> ${SERVER_CONFIG_FILE}
   echo "mode server" >> ${SERVER_CONFIG_FILE}
+  echo "tls-server" >> ${SERVER_CONFIG_FILE}
   echo "ca ${KEYS_PATH}/ca.crt" >> ${SERVER_CONFIG_FILE}
   echo "cert ${KEYS_PATH}/server.crt" >> ${SERVER_CONFIG_FILE}
   echo "key ${KEYS_PATH}/server.key" >> ${SERVER_CONFIG_FILE}
