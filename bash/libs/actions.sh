@@ -59,3 +59,7 @@ create_server_conf () {
   done
   build_server_config
 }
+
+erase_server_cert () {
+  rm -Rf /etc/openvpn/easy-rsa > /dev/null 2>&1
+}

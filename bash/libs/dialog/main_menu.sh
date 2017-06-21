@@ -50,11 +50,12 @@ main_menu () {
         #create_client_cert
         ;;
       2) 
-        #create_server_conf
+        create_server_conf
         ;;
       3)
-        #erase_server_cert
-        #create_ca
+        erase_server_cert
+        create_ca
+        create_server_conf
         ;;
       4) 
         exit 0
