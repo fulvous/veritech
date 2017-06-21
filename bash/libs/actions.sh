@@ -51,7 +51,7 @@ create_server_conf () {
   while [ "$DATA_OK" == "false" ] ; do
     get_protocol
     get_port
-    get_server_net
+    get_server_pool
     get_device
     get_dns
     get_gateway
