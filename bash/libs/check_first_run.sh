@@ -35,6 +35,7 @@ check_first_run () {
   if [ -f "./data/first_run" ] ; then
     echoD "first_run"
     create_ca
+    create_server_conf
     rm -f ./data/first_run
   fi
 
