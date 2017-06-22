@@ -127,7 +127,7 @@ msgstr "Notación de red de servidor equivocada, usa algo como: 172.16.32.0 255.
 msgid "get_server_net_title"
 msgstr "Red del servidor"
 msgid "get_server_net_content"
-msgstr "Ingresa las ips dinámicas a asignar, usa la siguiente notación (ip-inicial ip-final máscara): 10.1.0.1 10.1.0.100 255.255.255.0"
+msgstr "Ingresa las ips dinámicas a asignar, usa la siguiente notación (ip-inicial ip-final máscara): 10.1.0.2 10.1.0.100 255.255.255.0"
 msgid "choose_action"
 msgstr "Seleccione una acción:"
 msgid "create_client_cert"

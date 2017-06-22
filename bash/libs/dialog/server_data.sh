@@ -207,6 +207,8 @@ get_server_pool () {
   SERVER_IP=$( echo ${SERVER_POOL} | egrep -o '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.' )
   SERVER_IP="${SERVER_IP}1"
   echo "$SERVER_IP" > ./data/values/server_ip
+  SERVER_MASK=$( echo ${SERVER_POOL} | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$' )
+  echo "$SERVER_MASK" > ./data/values/server_mask
 }
 
 check_dns () {
@@ -319,7 +321,7 @@ get_static_route () {
 }
 
 validate_server_config () {
-  DATA="  $(echoP 'server_ip'): '$SERVER_IP'\n\
+  DATA="  $(echoP 'server_ip'): '$SERVER_IP $SERVER_MASK'\n\
   $(echoP 'server_port'): '$SERVER_PORT'\n\
   $(echoP 'server_device'): '$SERVER_DEVICE'\n\
   $(echoP 'server_protocol'): '$SERVER_PROTOCOL'\n\
@@ -351,6 +353,7 @@ build_server_config () {
   echo "dh ${KEYS_PATH}/dh$(cat ./data/values/server_key_size).pem" >> ${SERVER_CONFIG_FILE}
   echo "topology subnet" >> ${SERVER_CONFIG_FILE}
   echo "push \"topology subnet\"" >> ${SERVER_CONFIG_FILE}
+  echo "ifconfig ${SERVER_IP} ${SERVER_MASK}" >> ${SERVER_CONFIG_FILE}
   cat ./data/values/server_static_route >> ${SERVER_CONFIG_FILE}
   cat ./data/values/server_gateway >> ${SERVER_CONFIG_FILE}
   cat ./data/values/server_pool >> ${SERVER_CONFIG_FILE}
@@ -360,4 +363,6 @@ build_server_config () {
   echo "comp-lzo" >> ${SERVER_CONFIG_FILE}
   echo "status /var/log/openvpn.log" >> ${SERVER_CONFIG_FILE}
   echo "verb 3" >> ${SERVER_CONFIG_FILE}
+  
+  mkdir -p /etc/openvpn/ccd
 }
