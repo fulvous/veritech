@@ -47,7 +47,7 @@ main_menu () {
 
     case $OPT in
       1)
-        #create_client_cert
+        create_client_cert
         ;;
       2) 
         create_server_conf

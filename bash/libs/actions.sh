@@ -63,3 +63,17 @@ create_server_conf () {
 erase_server_cert () {
   rm -Rf /etc/openvpn/easy-rsa > /dev/null 2>&1
 }
+
+create_client_cert () {
+  DATA_OK="false"
+  while [ "$DATA_OK" == "false" ] ; do
+    get_prefix
+    get_network
+    select_ip
+    create_client_key
+    delete_selected
+    ovpn_config
+    DATA_OK="true"
+  done
+
+}

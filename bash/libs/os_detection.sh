@@ -60,6 +60,9 @@ supported_platform () {
     esac
   elif [ "${OS}" == "debian" ] ; then
     case "${VER}" in
+      "jessie/sid" ) SUPPORTED="true"
+        DIALOG="/usr/bin/dialog"
+        ;;
       "stretch/sid" ) SUPPORTED="true"
         DIALOG="/usr/bin/dialog"
         ;;

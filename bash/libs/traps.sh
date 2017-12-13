@@ -29,64 +29,8 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-CURR_DIR="$(pwd)"
-export TEXTDOMAINDIR=$CURR_DIR/bash/locale
-export TEXTDOMAIN=veritech
-
-#import libraries
-. ./bash/libs/os_detection.sh
-. ./bash/libs/i18n_echo.sh
-. ./bash/libs/check_root.sh
-. ./bash/libs/dependencies.sh
-. ./bash/libs/actions.sh
-. ./bash/libs/check_first_run.sh
-. ./bash/libs/traps.sh
-. ./bash/libs/dialog/common.sh
-. ./bash/libs/dialog/welcome.sh
-. ./bash/libs/dialog/easy-rsa.sh
-. ./bash/libs/dialog/server_data.sh
-. ./bash/libs/dialog/cert_data.sh
-. ./bash/libs/dialog/server_cert.sh
-. ./bash/libs/dialog/client_cert.sh
-. ./bash/libs/dialog/main_menu.sh
-. ./bash/libs/dialog/main_menu.sh
-
-D=false
-SCRIPT=$0
-COUNTRIES=./data/countries.csv
-NEW_EASY="/etc/openvpn/easy-rsa/"
-VARS="${NEW_EASY}vars"
-NET_TMP="/tmp/net_file.tmp"
-CONFIG="/etc/openvpn/configs/"
-CCD="/etc/openvpn/ccd/"
-
-usage () {
-  echo "Usage: $0"
-  echo " Poner uso aqui"
+clean () {
+  rm ${NET_TMP}
 }
 
-while getopts "v" optname ; do
-  case $optname in
-  "v")  D=true
-        echoD "getopts_debug_enabled"
-        ;;
-  "?")
-        D=true
-        error "getopts_unknown_option"
-        usage
-        ;;
-  esac
-done
-
-echoD "debug_current_platform" "$ARCH $OS $VER"
-supported_platform
-
-check_root
-
-welcome
-
-install_dependencies
-
-check_first_run
-
-main_menu
+trap clean EXIT

@@ -42,8 +42,6 @@ build_server_cert () {
 
   if [ "$OS" == "redhat" ] ; then
 
-    NEW_EASY="/etc/openvpn/easy-rsa/"
-    VARS="${NEW_EASY}vars"
     egrep -v "$KEY_LIST" ./data/backup/vars > $VARS
     echo "export KEY_COUNTRY=\"$(cat $VALUES/cert_country)\"" >> $VARS
     echo "export KEY_PROVINCE=\"$(cat $VALUES/cert_province)\"" >> $VARS
@@ -96,8 +94,6 @@ build_server_cert () {
 
   elif [ "$OS" == "debian" ] ; then
 
-    NEW_EASY="/etc/openvpn/easy-rsa/"
-    VARS="${NEW_EASY}vars"
     egrep -v "$KEY_LIST" ./data/backup/vars > $VARS
     echo "export KEY_COUNTRY=\"$(cat $VALUES/cert_country)\"" >> $VARS
     echo "export KEY_PROVINCE=\"$(cat $VALUES/cert_province)\"" >> $VARS
