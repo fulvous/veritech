@@ -194,10 +194,10 @@ fi
   cp ${NEW_EASY}keys/ca.crt ${CONFIG}/${PREFIX}_${SELECTED_IP}/keys
   cp ${CONFIG}/${PREFIX}_${SELECTED_IP}/keys/* ${CONFIG}/${PREFIX}_${SELECTED_IP}/${BRAND}
 
-  SERVER_NAME=$( cat $CURR_DIR/data/server_name )
-  SERVER_PORT=$( cat $CURR_DIR/data/server_port | egrep -o '[0-9]+[ ]*$' )
+  SERVER_NAME=$( cat $CURR_DIR/data/values/server_name )
+  SERVER_PORT=$( cat $CURR_DIR/data/values/server_port | egrep -o '[0-9]+[ ]*$' )
 
-cat < EOT > ${CONFIG}/${PREFIX}_${SELECTED_IP}/${BRAND}/${OVPN}
+cat << EOT > ${CONFIG}/${PREFIX}_${SELECTED_IP}/${BRAND}/${OVPN}
 client
 resolv-retry infinite
 nobind
