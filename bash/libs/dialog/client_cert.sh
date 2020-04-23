@@ -177,7 +177,7 @@ delete_selected () {
 
 ovpn_config () {
 
-if [ ! -f ./data/values/server_device ] ; then
+if [ ! -f $CURR_DIR/data/values/server_device ] ; then
     $DIALOG --backtitle "$BACK_TITLE" \
             --title "$( echoP 'wrong_data_title')" \
             --msgbox "$( echoP 'wrong_file_not_found') $CURR_DIR/data/values/server_device" \
@@ -210,8 +210,8 @@ verb 3
 ns-cert-type server
 EOT
 
-  cat ./data/values/server_device >> ${CONFIG}/${PREFIX}_${SELECTED_IP}/${BRAND}/${OVPN}
-  cat ./data/values/server_protocol >> ${CONFIG}/${PREFIX}_${SELECTED_IP}/${BRAND}/${OVPN}
+  cat $CURR_DIR/data/values/server_device >> ${CONFIG}/${PREFIX}_${SELECTED_IP}/${BRAND}/${OVPN}
+  cat $CURR_DIR/data/values/server_protocol >> ${CONFIG}/${PREFIX}_${SELECTED_IP}/${BRAND}/${OVPN}
   echo "remote $SERVER_NAME $SERVER_PORT" >> ${CONFIG}/${PREFIX}_${SELECTED_IP}/${BRAND}/${OVPN}
   echo "cert ${PREFIX}_${SELECTED_IP}.crt" >> ${CONFIG}/${PREFIX}_${SELECTED_IP}/${BRAND}/${OVPN}
   echo "key ${PREFIX}_${SELECTED_IP}.key" >> ${CONFIG}/${PREFIX}_${SELECTED_IP}/${BRAND}/${OVPN}

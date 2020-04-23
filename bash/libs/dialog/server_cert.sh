@@ -31,7 +31,7 @@
 
 KEY_LIST="(KEY_COUNTRY|KEY_PROVINCE|KEY_CITY|KEY_ORG|KEY_EMAIL|KEY_SIZE|KEY_OU)"
 
-VALUES="data/values"
+VALUES="$CURR_DIR/data/values"
 
 build_server_cert () {
   
@@ -42,7 +42,7 @@ build_server_cert () {
 
   if [ "$OS" == "redhat" ] ; then
 
-    egrep -v "$KEY_LIST" ./data/backup/vars > $VARS
+    egrep -v "$KEY_LIST" $CURR_DIR/data/backup/vars > $VARS
     echo "export KEY_COUNTRY=\"$(cat $VALUES/cert_country)\"" >> $VARS
     echo "export KEY_PROVINCE=\"$(cat $VALUES/cert_province)\"" >> $VARS
     echo "export KEY_CITY=\"$(cat $VALUES/cert_city)\"" >> $VARS
@@ -94,7 +94,7 @@ build_server_cert () {
 
   elif [ "$OS" == "debian" ] ; then
 
-    egrep -v "$KEY_LIST" ./data/backup/vars > $VARS
+    egrep -v "$KEY_LIST" $CURR_DIR/data/backup/vars > $VARS
     echo "export KEY_COUNTRY=\"$(cat $VALUES/cert_country)\"" >> $VARS
     echo "export KEY_PROVINCE=\"$(cat $VALUES/cert_province)\"" >> $VARS
     echo "export KEY_CITY=\"$(cat $VALUES/cert_city)\"" >> $VARS

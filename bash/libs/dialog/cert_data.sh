@@ -54,8 +54,8 @@ get_ou () {
   done
   
   CERT_OU=$OPT
-  mkdir -p ./data/values
-  echo "$CERT_OU" > ./data/values/cert_ou
+  mkdir -p $CURR_DIR/data/values
+  echo "$CERT_OU" > $CURR_DIR/data/values/cert_ou
 }
 
 
@@ -91,8 +91,8 @@ get_country () {
 
   OPT2=${countriesCode[${OPT}]}
   CERT_COUNTRY=$OPT2
-  mkdir -p ./data/values
-  echo "$CERT_COUNTRY" > ./data/values/cert_country
+  mkdir -p $CURR_DIR/data/values
+  echo "$CERT_COUNTRY" > $CURR_DIR/data/values/cert_country
 }
 
 check_province () {
@@ -121,8 +121,8 @@ get_province () {
   done
   
   CERT_PROVINCE=$OPT
-  mkdir -p ./data/values
-  echo "$CERT_PROVINCE" > ./data/values/cert_province
+  mkdir -p $CURR_DIR/data/values
+  echo "$CERT_PROVINCE" > $CURR_DIR/data/values/cert_province
 }
 
 check_city () {
@@ -151,8 +151,8 @@ get_city () {
   done
   
   CERT_CITY=$OPT
-  mkdir -p ./data/values
-  echo "$CERT_CITY" > ./data/values/cert_city
+  mkdir -p $CURR_DIR/data/values
+  echo "$CERT_CITY" > $CURR_DIR/data/values/cert_city
 }
 
 check_organization () {
@@ -181,8 +181,8 @@ get_organization () {
   done
   
   CERT_ORGANIZATION=$OPT
-  mkdir -p ./data/values
-  echo "$CERT_ORGANIZATION" > ./data/values/cert_organization
+  mkdir -p $CURR_DIR/data/values
+  echo "$CERT_ORGANIZATION" > $CURR_DIR/data/values/cert_organization
 }
 
 
@@ -212,8 +212,8 @@ get_email () {
   done
   
   CERT_EMAIL=$OPT
-  mkdir -p ./data/values
-  echo "$CERT_EMAIL" > ./data/values/cert_email
+  mkdir -p $CURR_DIR/data/values
+  echo "$CERT_EMAIL" > $CURR_DIR/data/values/cert_email
 }
 
 validate_cert () {

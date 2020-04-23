@@ -58,8 +58,8 @@ get_server () {
   done
 
   SERVER_NAME=$OPT
-  mkdir -p ./data/values
-  echo "$SERVER_NAME" > ./data/values/server_name
+  mkdir -p $CURR_DIR/data/values
+  echo "$SERVER_NAME" > $CURR_DIR/data/values/server_name
 }
 
 get_protocol () {
@@ -80,8 +80,8 @@ get_protocol () {
       ;;
   esac
 
-  mkdir -p ./data/values
-  echo "proto $SERVER_PROTOCOL" > ./data/values/server_protocol
+  mkdir -p $CURR_DIR/data/values
+  echo "proto $SERVER_PROTOCOL" > $CURR_DIR/data/values/server_protocol
 }
 
 
@@ -103,8 +103,8 @@ get_device () {
       ;;
   esac
 
-  mkdir -p ./data/values
-  echo "dev $SERVER_DEVICE" > ./data/values/server_device
+  mkdir -p $CURR_DIR/data/values
+  echo "dev $SERVER_DEVICE" > $CURR_DIR/data/values/server_device
 }
 
 
@@ -138,8 +138,8 @@ get_port () {
   done
 
   SERVER_PORT=$OPT
-  mkdir -p ./data/values
-  echo "port $SERVER_PORT" > ./data/values/server_port
+  mkdir -p $CURR_DIR/data/values
+  echo "port $SERVER_PORT" > $CURR_DIR/data/values/server_port
 }
 
 get_key_size () {
@@ -169,8 +169,8 @@ get_key_size () {
       ;;
   esac
 
-  mkdir -p ./data/values
-  echo "$SERVER_KEY_SIZE" > ./data/values/server_key_size
+  mkdir -p $CURR_DIR/data/values
+  echo "$SERVER_KEY_SIZE" > $CURR_DIR/data/values/server_key_size
 }
 
 check_server_pool () {
@@ -201,14 +201,14 @@ get_server_pool () {
   done
 
   SERVER_POOL=$OPT 
-  mkdir -p ./data/values
-  echo "ifconfig-pool $SERVER_POOL" > ./data/values/server_pool
+  mkdir -p $CURR_DIR/data/values
+  echo "ifconfig-pool $SERVER_POOL" > $CURR_DIR/data/values/server_pool
 
   SERVER_IP=$( echo ${SERVER_POOL} | egrep -o '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.' )
   SERVER_IP="${SERVER_IP}1"
-  echo "$SERVER_IP" > ./data/values/server_ip
+  echo "$SERVER_IP" > $CURR_DIR/data/values/server_ip
   SERVER_MASK=$( echo ${SERVER_POOL} | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$' )
-  echo "$SERVER_MASK" > ./data/values/server_mask
+  echo "$SERVER_MASK" > $CURR_DIR/data/values/server_mask
 }
 
 check_dns () {
@@ -240,8 +240,8 @@ get_dns () {
   done
 
   SERVER_DNS=$OPT
-  mkdir -p ./data/values
-  echo "push \"dhcp-option DNS $SERVER_DNS\"" > ./data/values/server_dns
+  mkdir -p $CURR_DIR/data/values
+  echo "push \"dhcp-option DNS $SERVER_DNS\"" > $CURR_DIR/data/values/server_dns
 }
 
 get_gateway () {
@@ -263,8 +263,8 @@ get_gateway () {
       ;;
   esac
 
-  mkdir -p ./data/values
-  echo "$SERVER_GATEWAY" > ./data/values/server_gateway
+  mkdir -p $CURR_DIR/data/values
+  echo "$SERVER_GATEWAY" > $CURR_DIR/data/values/server_gateway
 }
 
 check_static_route () {
@@ -298,14 +298,14 @@ get_static_route () {
     done
 
     SERVER_STATIC_ROUTE=$OPT 
-    mkdir -p ./data/values
+    mkdir -p $CURR_DIR/data/values
     if [ "${FIRST_ROUTE}" == "1" ] ; then
-      echo "push \"route $SERVER_STATIC_ROUTE\"" > ./data/values/server_static_route
+      echo "push \"route $SERVER_STATIC_ROUTE\"" > $CURR_DIR/data/values/server_static_route
       SERVER_ROUTES="${SERVER_STATIC_ROUTE}"
       FIRST_ROUTE=0
     else
       SERVER_ROUTES="${SERVER_ROUTES}${SERVER_STATIC_ROUTE}"
-      echo "push \"route $SERVER_STATIC_ROUTE\"" >> ./data/values/server_static_route
+      echo "push \"route $SERVER_STATIC_ROUTE\"" >> $CURR_DIR/data/values/server_static_route
     fi
 
     $DIALOG --stdout --backtitle "${BACK_TITLE}" \
@@ -342,23 +342,23 @@ build_server_config () {
   KEYS_PATH="/etc/openvpn/easy-rsa/keys"
   SERVER_CONFIG_FILE="/etc/openvpn/server.conf"
   > ${SERVER_CONFIG_FILE}
-  cat ./data/values/server_port > ${SERVER_CONFIG_FILE}
-  cat ./data/values/server_protocol >> ${SERVER_CONFIG_FILE}
-  cat ./data/values/server_device >> ${SERVER_CONFIG_FILE}
+  cat $CURR_DIR/data/values/server_port > ${SERVER_CONFIG_FILE}
+  cat $CURR_DIR/data/values/server_protocol >> ${SERVER_CONFIG_FILE}
+  cat $CURR_DIR/data/values/server_device >> ${SERVER_CONFIG_FILE}
   echo "mode server" >> ${SERVER_CONFIG_FILE}
   echo "tls-server" >> ${SERVER_CONFIG_FILE}
   echo "ca ${KEYS_PATH}/ca.crt" >> ${SERVER_CONFIG_FILE}
   echo "cert ${KEYS_PATH}/server.crt" >> ${SERVER_CONFIG_FILE}
   echo "key ${KEYS_PATH}/server.key" >> ${SERVER_CONFIG_FILE}
-  echo "dh ${KEYS_PATH}/dh$(cat ./data/values/server_key_size).pem" >> ${SERVER_CONFIG_FILE}
+  echo "dh ${KEYS_PATH}/dh$(cat $CURR_DIR/data/values/server_key_size).pem" >> ${SERVER_CONFIG_FILE}
   echo "topology subnet" >> ${SERVER_CONFIG_FILE}
   echo "push \"topology subnet\"" >> ${SERVER_CONFIG_FILE}
   echo "ifconfig ${SERVER_IP} ${SERVER_MASK}" >> ${SERVER_CONFIG_FILE}
-  cat ./data/values/server_static_route >> ${SERVER_CONFIG_FILE}
-  cat ./data/values/server_gateway >> ${SERVER_CONFIG_FILE}
-  cat ./data/values/server_pool >> ${SERVER_CONFIG_FILE}
+  cat $CURR_DIR/data/values/server_static_route >> ${SERVER_CONFIG_FILE}
+  cat $CURR_DIR/data/values/server_gateway >> ${SERVER_CONFIG_FILE}
+  cat $CURR_DIR/data/values/server_pool >> ${SERVER_CONFIG_FILE}
   echo "client-config-dir /etc/openvpn/ccd" >> ${SERVER_CONFIG_FILE}
-  cat ./data/values/server_dns >> ${SERVER_CONFIG_FILE}
+  cat $CURR_DIR/data/values/server_dns >> ${SERVER_CONFIG_FILE}
   echo "keepalive 10 120" >> ${SERVER_CONFIG_FILE}
   echo "comp-lzo" >> ${SERVER_CONFIG_FILE}
   echo "status /var/log/openvpn.log" >> ${SERVER_CONFIG_FILE}

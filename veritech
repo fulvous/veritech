@@ -54,7 +54,7 @@ export TEXTDOMAIN=veritech
 
 D=false
 SCRIPT=$0
-COUNTRIES=./data/countries.csv
+COUNTRIES=$CURR_DIR/data/countries.csv
 NEW_EASY="/etc/openvpn/easy-rsa/"
 VARS="${NEW_EASY}vars"
 NET_TMP="/tmp/net_file.tmp"

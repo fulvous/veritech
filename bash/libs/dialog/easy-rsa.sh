@@ -44,7 +44,7 @@ setup_easy-rsa () {
     EASY_RSA="/usr/share/easy-rsa/2.0/*"
     NEW_EASY="/etc/openvpn/easy-rsa/"
     mkdir -p ${NEW_EASY}
-    mkdir -p ./data/backup
+    mkdir -p $CURR_DIR/data/backup
     echo 30 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'easy-rsa_title')" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
@@ -56,8 +56,8 @@ setup_easy-rsa () {
                       --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
-    cp -af /etc/openvpn/easy-rsa/vars ./data/backup/vars   
-    egrep -v "$KEY_LIST" ./data/backup/vars > /etc/openvpn/easy-rsa/vars
+    cp -af /etc/openvpn/easy-rsa/vars $CURR_DIR/data/backup/vars   
+    egrep -v "$KEY_LIST" $CURR_DIR/data/backup/vars > /etc/openvpn/easy-rsa/vars
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'easy-rsa_title')" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
@@ -69,7 +69,7 @@ setup_easy-rsa () {
     EASY_RSA="/usr/share/easy-rsa/*"    
     NEW_EASY="/etc/openvpn/easy-rsa/"
     mkdir -p ${NEW_EASY}
-    mkdir -p ./data/backup
+    mkdir -p $CURR_DIR/data/backup
     echo 30 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'easy-rsa_title')" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
@@ -81,8 +81,8 @@ setup_easy-rsa () {
                       --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
-    cp -af /etc/openvpn/easy-rsa/vars ./data/backup/vars   
-    egrep -v "$KEY_LIST" ./data/backup/vars > /etc/openvpn/easy-rsa/vars
+    cp -af /etc/openvpn/easy-rsa/vars $CURR_DIR/data/backup/vars   
+    egrep -v "$KEY_LIST" $CURR_DIR/data/backup/vars > /etc/openvpn/easy-rsa/vars
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'easy-rsa_title')" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
