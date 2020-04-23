@@ -29,27 +29,28 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-CURR_DIR="$(pwd)"
+CURR_DIR=$( cd "$( dirname "$0")" && pwd )
+
 export TEXTDOMAINDIR=$CURR_DIR/bash/locale
 export TEXTDOMAIN=veritech
 
 #import libraries
-. ./bash/libs/os_detection.sh
-. ./bash/libs/i18n_echo.sh
-. ./bash/libs/check_root.sh
-. ./bash/libs/dependencies.sh
-. ./bash/libs/actions.sh
-. ./bash/libs/check_first_run.sh
-. ./bash/libs/traps.sh
-. ./bash/libs/dialog/common.sh
-. ./bash/libs/dialog/welcome.sh
-. ./bash/libs/dialog/easy-rsa.sh
-. ./bash/libs/dialog/server_data.sh
-. ./bash/libs/dialog/cert_data.sh
-. ./bash/libs/dialog/server_cert.sh
-. ./bash/libs/dialog/client_cert.sh
-. ./bash/libs/dialog/main_menu.sh
-. ./bash/libs/dialog/main_menu.sh
+. $CURR_DIR/bash/libs/os_detection.sh
+. $CURR_DIR/bash/libs/i18n_echo.sh
+. $CURR_DIR/bash/libs/check_root.sh
+. $CURR_DIR/bash/libs/dependencies.sh
+. $CURR_DIR/bash/libs/actions.sh
+. $CURR_DIR/bash/libs/check_first_run.sh
+. $CURR_DIR/bash/libs/traps.sh
+. $CURR_DIR/bash/libs/dialog/common.sh
+. $CURR_DIR/bash/libs/dialog/welcome.sh
+. $CURR_DIR/bash/libs/dialog/easy-rsa.sh
+. $CURR_DIR/bash/libs/dialog/server_data.sh
+. $CURR_DIR/bash/libs/dialog/cert_data.sh
+. $CURR_DIR/bash/libs/dialog/server_cert.sh
+. $CURR_DIR/bash/libs/dialog/client_cert.sh
+. $CURR_DIR/bash/libs/dialog/main_menu.sh
+. $CURR_DIR/bash/libs/dialog/main_menu.sh
 
 D=false
 SCRIPT=$0
