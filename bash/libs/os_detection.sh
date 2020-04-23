@@ -69,6 +69,7 @@ supported_platform () {
     #  *) SUPPORTED="false"
     #    ;;
     #esac
+    DIALOG="/usr/bin/dialog"
     SUPPORTED="true"
   fi
 
