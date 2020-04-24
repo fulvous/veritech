@@ -339,7 +339,7 @@ validate_server_config () {
 }
 
 build_server_config () {
-  KEYS_PATH="/etc/openvpn/easy-rsa/keys"
+  KEYS_PATH="/etc/openvpn/easy-rsa/pki"
   SERVER_CONFIG_FILE="/etc/openvpn/server.conf"
   > ${SERVER_CONFIG_FILE}
   cat $CURR_DIR/data/values/server_port > ${SERVER_CONFIG_FILE}
@@ -348,9 +348,9 @@ build_server_config () {
   echo "mode server" >> ${SERVER_CONFIG_FILE}
   echo "tls-server" >> ${SERVER_CONFIG_FILE}
   echo "ca ${KEYS_PATH}/ca.crt" >> ${SERVER_CONFIG_FILE}
-  echo "cert ${KEYS_PATH}/server.crt" >> ${SERVER_CONFIG_FILE}
-  echo "key ${KEYS_PATH}/server.key" >> ${SERVER_CONFIG_FILE}
-  echo "dh ${KEYS_PATH}/dh$(cat $CURR_DIR/data/values/server_key_size).pem" >> ${SERVER_CONFIG_FILE}
+  echo "cert ${KEYS_PATH}/issued/$(cat $CURR_DIR/data/values/server_name).crt" >> ${SERVER_CONFIG_FILE}
+  echo "key ${KEYS_PATH}/private/$(cat $CURR_DIR/data/values/server_name).key" >> ${SERVER_CONFIG_FILE}
+  echo "dh ${KEYS_PATH}/dh.pem" >> ${SERVER_CONFIG_FILE}
   echo "topology subnet" >> ${SERVER_CONFIG_FILE}
   echo "push \"topology subnet\"" >> ${SERVER_CONFIG_FILE}
   echo "ifconfig ${SERVER_IP} ${SERVER_MASK}" >> ${SERVER_CONFIG_FILE}

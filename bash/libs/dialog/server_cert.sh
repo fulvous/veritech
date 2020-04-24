@@ -153,7 +153,5 @@ build_server_cert () {
         $SY $SX
     fi
 
-    #./easyrsa build-server-full
-     
   fi
 }
