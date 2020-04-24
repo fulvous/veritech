@@ -36,7 +36,7 @@ KEY_LIST="(EASYRSA_REQ_COUNTRY|EASYRSA_REQ_PROVINCE|EASYRSA_REQ_CITY|EASYRSA_REQ
 VALUES="$CURR_DIR/data/values"
 
 build_server_cert () {
-  
+
   echo 0 | $DIALOG  --backtitle "${BACK_TITLE}" \
                     --title "$(echoP 'server_cert_title')" \
                     --gauge "$(echoP 'server_cert_content')" \
@@ -99,44 +99,47 @@ build_server_cert () {
   elif [ "$OS" == "debian" ] ; then
 
     egrep -v "$KEY_LIST" $CURR_DIR/data/backup/vars > $VARS
-    echo "set_var EASYRSA_REQ_COUNTRY=\"$(cat $VALUES/cert_country)\"" >> $VARS
-    echo "set_var EASYRSA_REQ_PROVINCE=\"$(cat $VALUES/cert_province)\"" >> $VARS
-    echo "set_var EASYRSA_REQ_CITY=\"$(cat $VALUES/cert_city)\"" >> $VARS
-    echo "set_var EASYRSA_REQ_ORG=\"$(cat $VALUES/cert_organization)\"" >> $VARS
-    echo "set_var EASYRSA_REQ_EMAIL=\"$(cat $VALUES/cert_email)\"" >> $VARS
-    echo "set_var EASYRSA_REQ_OU=\"$(cat $VALUES/cert_ou)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_COUNTRY \"$(cat $VALUES/cert_country)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_PROVINCE \"$(cat $VALUES/cert_province)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_CITY \"$(cat $VALUES/cert_city)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_ORG \"$(cat $VALUES/cert_organization)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_EMAIL \"$(cat $VALUES/cert_email)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_OU \"$(cat $VALUES/cert_ou)\"" >> $VARS
     echo "set_var EASYRSA_KEY_SIZE $(cat $VALUES/server_key_size)" >> $VARS
-    echo "set_var EASYRSA_REQ_CN=\"$(cat $VALUES/server_name)\"" >> $VARS
-    echo "set_var EASYRSA_BATCH=\"yes\"" >> $VARS
+    echo "set_var EASYRSA_REQ_CN \"$(cat $VALUES/server_name)\"" >> $VARS
+    echo "set_var EASYRSA_BATCH \"yes\"" >> $VARS
 
     echo 10 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
                       ${SY} ${SX}
-    
-    cd ${NEW_EASY}
+
+    rm -Rf ${NEW_EASY}
     make-cadir ${NEW_EASY}
+    cd ${NEW_EASY}
+    sed 's/^RANDFILE.*ENV/#&/' openssl-easyrsa.cnf > openssl-easyrsa.cnf.new
+    cp -f openssl-easyrsa.cnf.new openssl-easyrsa.cnf
+    rm -f openssl-easyrsa.cnf.new
     ./easyrsa --batch init-pki > /dev/null 2>&1
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
                       ${SY} ${SX}
   
-    export EASY_RSA="${EASY_RSA:-.}"
-    ./easyrsa build-ca nopass > /dev/null 2>&1
+    ./easyrsa --batch build-ca nopass > /dev/null 2>&1
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
                       ${SY} ${SX}
     
-    export EASY_RSA="${EASY_RSA:-.}"
-    ./easyrsa gen-req $* nopass && ./easyrsa sign-req server $* > /dev/null 2>&1
+    ./easyrsa --batch gen-req "$(cat $VALUES/server_name)" nopass && 
+      ./easyrsa --batch sign-req server "$(cat $VALUES/server_name)" > /dev/null 2>&1
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
                       ${SY} ${SX}
 
-    ./easyrsa gen-dh > /dev/null 2>&1
+    ./easyrsa --batch gen-dh > /dev/null 2>&1
     OUT=$?
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
@@ -150,7 +153,7 @@ build_server_cert () {
         $SY $SX
     fi
 
-    ./easyrsa build-server-full
+    #./easyrsa build-server-full
      
   fi
 }

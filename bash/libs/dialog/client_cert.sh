@@ -43,7 +43,6 @@ get_vars_file () {
   done
   
   #source $FILE
-  ./easyrsa init-pki
 
 }
 
@@ -163,9 +162,9 @@ select_ip () {
 
 create_client_key () {
   cd $NEW_EASY
-  get_vars_file
-  export KEY_CN="${PREFIX}_${SELECTED_IP}"
-  ./easyrsa build-client-full ${PREFIX}_${SELECTED_IP}
+  #get_vars_file
+  #export KEY_CN="${PREFIX}_${SELECTED_IP}"
+  ./easyrsa --batch build-client-full ${PREFIX}_${SELECTED_IP} nopass
   echo "ifconfig-push ${NET_PREFIX}${SELECTED_IP} ${NET_MASK}" > ${CCD}/${PREFIX}_${SELECTED_IP}
   cd $CURR_DIR
   sleep 5
@@ -191,8 +190,9 @@ fi
     mkdir -p ${CONFIG}/${PREFIX}_${SELECTED_IP}/keys
     mkdir -p ${CONFIG}/${PREFIX}_${SELECTED_IP}/${BRAND}
   fi
-  cp ${NEW_EASY}keys/${PREFIX}_${SELECTED_IP}.* ${CONFIG}/${PREFIX}_${SELECTED_IP}/keys
-  cp ${NEW_EASY}keys/ca.crt ${CONFIG}/${PREFIX}_${SELECTED_IP}/keys
+  cp ${NEW_EASY}pki/issued/${PREFIX}_${SELECTED_IP}.* ${CONFIG}/${PREFIX}_${SELECTED_IP}/keys
+  cp ${NEW_EASY}pki/private/${PREFIX}_${SELECTED_IP}.* ${CONFIG}/${PREFIX}_${SELECTED_IP}/keys
+  cp ${NEW_EASY}pki/ca.crt ${CONFIG}/${PREFIX}_${SELECTED_IP}/keys
   cp ${CONFIG}/${PREFIX}_${SELECTED_IP}/keys/* ${CONFIG}/${PREFIX}_${SELECTED_IP}/${BRAND}
 
   SERVER_NAME=$( cat $CURR_DIR/data/values/server_name )
