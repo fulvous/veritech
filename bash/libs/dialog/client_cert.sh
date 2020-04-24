@@ -42,7 +42,8 @@ get_vars_file () {
     fi
   done
   
-  source $FILE
+  #source $FILE
+  ./easyrsa init-pki
 
 }
 
@@ -164,7 +165,7 @@ create_client_key () {
   cd $NEW_EASY
   get_vars_file
   export KEY_CN="${PREFIX}_${SELECTED_IP}"
-  ./build-key ${PREFIX}_${SELECTED_IP}
+  ./easyrsa build-client-full ${PREFIX}_${SELECTED_IP}
   echo "ifconfig-push ${NET_PREFIX}${SELECTED_IP} ${NET_MASK}" > ${CCD}/${PREFIX}_${SELECTED_IP}
   cd $CURR_DIR
   sleep 5

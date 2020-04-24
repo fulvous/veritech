@@ -29,7 +29,9 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-KEY_LIST="(KEY_COUNTRY|KEY_PROVINCE|KEY_CITY|KEY_ORG|KEY_EMAIL|KEY_SIZE|KEY_OU)"
+#KEY_LIST="(KEY_COUNTRY|KEY_PROVINCE|KEY_CITY|KEY_ORG|KEY_EMAIL|KEY_SIZE|KEY_OU)"
+KEY_LIST="(EASYRSA_REQ_COUNTRY|EASYRSA_REQ_PROVINCE|EASYRSA_REQ_CITY|EASYRSA_REQ_ORG|EASYRSA_REQ_EMAIL|EASYRSA_REQ_OU|EASYRSA_KEY_SIZE|EASYRSA_REQ_CN|EASYRSA_BATCH)"
+
 
 VALUES="$CURR_DIR/data/values"
 
@@ -43,13 +45,15 @@ build_server_cert () {
   if [ "$OS" == "redhat" ] ; then
 
     egrep -v "$KEY_LIST" $CURR_DIR/data/backup/vars > $VARS
-    echo "export KEY_COUNTRY=\"$(cat $VALUES/cert_country)\"" >> $VARS
-    echo "export KEY_PROVINCE=\"$(cat $VALUES/cert_province)\"" >> $VARS
-    echo "export KEY_CITY=\"$(cat $VALUES/cert_city)\"" >> $VARS
-    echo "export KEY_ORG=\"$(cat $VALUES/cert_organization)\"" >> $VARS
-    echo "export KEY_EMAIL=\"$(cat $VALUES/cert_email)\"" >> $VARS
-    echo "export KEY_EMAIL=$(cat $VALUES/cert_email)" >> $VARS
-    echo "export KEY_SIZE=\"$(cat $VALUES/server_key_size)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_COUNTRY=\"$(cat $VALUES/cert_country)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_PROVINCE=\"$(cat $VALUES/cert_province)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_CITY=\"$(cat $VALUES/cert_city)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_ORG=\"$(cat $VALUES/cert_organization)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_EMAIL=\"$(cat $VALUES/cert_email)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_OU=\"$(cat $VALUES/cert_ou)\"" >> $VARS
+    echo "set_var EASYRSA_KEY_SIZE=\"$(cat $VALUES/server_key_size)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_CN=\"$(cat $VALUES/server_name)\"" >> $VARS
+    echo "set_var EASYRSA_BATCH=\"yes\"" >> $VARS
     echo 10 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
@@ -95,41 +99,44 @@ build_server_cert () {
   elif [ "$OS" == "debian" ] ; then
 
     egrep -v "$KEY_LIST" $CURR_DIR/data/backup/vars > $VARS
-    echo "export KEY_COUNTRY=\"$(cat $VALUES/cert_country)\"" >> $VARS
-    echo "export KEY_PROVINCE=\"$(cat $VALUES/cert_province)\"" >> $VARS
-    echo "export KEY_CITY=\"$(cat $VALUES/cert_city)\"" >> $VARS
-    echo "export KEY_ORG=\"$(cat $VALUES/cert_organization)\"" >> $VARS
-    echo "export KEY_EMAIL=\"$(cat $VALUES/cert_email)\"" >> $VARS
-    echo "export KEY_EMAIL=$(cat $VALUES/cert_email)" >> $VARS
-    echo "export KEY_SIZE=\"$(cat $VALUES/server_key_size)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_COUNTRY=\"$(cat $VALUES/cert_country)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_PROVINCE=\"$(cat $VALUES/cert_province)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_CITY=\"$(cat $VALUES/cert_city)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_ORG=\"$(cat $VALUES/cert_organization)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_EMAIL=\"$(cat $VALUES/cert_email)\"" >> $VARS
+    echo "set_var EASYRSA_REQ_OU=\"$(cat $VALUES/cert_ou)\"" >> $VARS
+    echo "set_var EASYRSA_KEY_SIZE $(cat $VALUES/server_key_size)" >> $VARS
+    echo "set_var EASYRSA_REQ_CN=\"$(cat $VALUES/server_name)\"" >> $VARS
+    echo "set_var EASYRSA_BATCH=\"yes\"" >> $VARS
+
     echo 10 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
                       ${SY} ${SX}
     
     cd ${NEW_EASY}
-    source ./vars > /dev/null 2>&1
-    ./clean-all > /dev/null 2>&1
+    make-cadir ${NEW_EASY}
+    ./easyrsa --batch init-pki > /dev/null 2>&1
     echo 40 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
                       ${SY} ${SX}
   
     export EASY_RSA="${EASY_RSA:-.}"
-    "$EASY_RSA/pkitool" --initca $* > /dev/null 2>&1
+    ./easyrsa build-ca nopass > /dev/null 2>&1
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
                       ${SY} ${SX}
     
     export EASY_RSA="${EASY_RSA:-.}"
-    "$EASY_RSA/pkitool" --server server > /dev/null 2>&1
+    ./easyrsa gen-req $* nopass && ./easyrsa sign-req server $* > /dev/null 2>&1
     echo 80 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
                       --gauge "$(echoP 'server_cert_content')" \
                       ${SY} ${SX}
 
-    ./build-dh > /dev/null 2>&1
+    ./easyrsa gen-dh > /dev/null 2>&1
     OUT=$?
     echo 100 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'server_cert_title')" \
@@ -142,6 +149,8 @@ build_server_cert () {
         --msgbox "$(echoP 'server_cert_successful')" \
         $SY $SX
     fi
+
+    ./easyrsa build-server-full
      
   fi
 }

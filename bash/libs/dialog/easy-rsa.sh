@@ -66,16 +66,17 @@ setup_easy-rsa () {
 
   elif [ "$OS" == "debian" ] ; then
 
-    EASY_RSA="/usr/share/easy-rsa/*"    
+    #EASY_RSA="/usr/share/easy-rsa/*"    
     NEW_EASY="/etc/openvpn/easy-rsa/"
-    mkdir -p ${NEW_EASY}
+    rmdir -Rf ${NEW_EASY}
     mkdir -p $CURR_DIR/data/backup
     echo 30 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'easy-rsa_title')" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
                       ${SY} ${SX}
     sleep 0.5
-    cp -afv ${EASY_RSA} ${NEW_EASY}
+    #cp -afv ${EASY_RSA} ${NEW_EASY}
+    make-cadir ${NEW_EASY}
     echo 60 | $DIALOG  --backtitle "${BACK_TITLE}" \
                       --title "$(echoP 'easy-rsa_title')" \
                       --gauge "$( echoP 'easy-rsa_content' )" \
